@@ -682,7 +682,7 @@ td:first-child {
 	margin-left: 3px;
 }
 .social4{
-	background: url(img/social-links.png);
+	background: url(/static/img/social-links.png);
 	background-position: -101px 0px;
 	height: 28px;
 	width: 28px;
