@@ -2,12 +2,12 @@ from django.shortcuts import render
 
 
 def main(request):
-    pass
+    return render(request, 'mainapp/index.html')
 
 
-def product(request):
-    pass
+def products(request):
+    return render(request, 'mainapp/products.html')
 
 
 def contact(request):
-    pass
+    return render(request, 'mainapp/contact.html')
