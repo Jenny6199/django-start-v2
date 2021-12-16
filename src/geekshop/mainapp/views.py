@@ -6,7 +6,21 @@ def main(request):
 
 
 def products(request):
-    return render(request, 'mainapp/products.html')
+
+    title = 'продукты'
+
+    related_products = [
+        {'href': '#', 'image': 'img/product-11.jpg'},
+        {'href': '#', 'image': 'img/product-21.jpg'},
+        {'href': '#', 'image': 'img/product-31.jpg'},
+    ]
+
+    content = {
+        'title': title,
+        'related_products': related_products,
+    }
+
+    return render(request, 'mainapp/products.html', content)
 
 
 def contact(request):
