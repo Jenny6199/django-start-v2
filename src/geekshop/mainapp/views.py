@@ -15,9 +15,17 @@ def products(request):
         {'href': '#', 'image': 'img/product-31.jpg'},
     ]
 
+    small_images = [
+    {'href': '#', 'image': 'img/controll.jpg'},
+    {'href': '#', 'image': 'img/controll1.jpg'},
+    {'href': '#', 'image': 'img/controll2.jpg'},
+
+    ]
+
     content = {
         'title': title,
         'related_products': related_products,
+        'small_images': small_images,
     }
 
     return render(request, 'mainapp/products.html', content)

@@ -24,21 +24,9 @@
 						<img src="{% static 'img/slider1.jpg' %}">
 					</div>
 					<div class="slider-control">
-						<div class="block">
-							<a href="#"><img src="{% static 'img/controll.jpg' %}" alt="">
-								<div class="text"></div>
-							</a>
-						</div>
-						<div class="block">
-							<a href="#"><img src="{% static 'img/controll1.jpg' %}" alt="">
-								<div class="text"></div>
-							</a>
-						</div>
-						<div class="block">
-							<a href="#"><img src="{% static 'img/controll2.jpg' %}" alt="">
-								<div class="text"></div>
-							</a>
-						</div>
+						{% for link in small_images %}
+							{% include 'includes/inc-small-images.html' %}
+						{% endfor %}
 					</div>
 				</div>
 
@@ -66,41 +54,9 @@
 					<a class="explore" href="#">показать все <img src="{% static 'img/arrow.png' %}" alt=""></a>
 				</div>
 				<div class="related-products clearfix">
-
 					{% for link in related_products %}
 						{% include 'includes/inc-related-products.html' %}
 					{% endfor %}
-<!--
-						<div class="block">
-							<a href="#"><img src="{% static 'img/product-11.jpg' %}" alt="">
-								<div class="text">
-									<img src="{% static 'img/icon-hover.png' %}" alt="img">
-									<h4>Стул повышенного качества</h4>
-									<p>Не оторваться. </p>
-								</div>
-							</a>
-						</div>
-
-						<div class="block">
-							<a href="#"><img src="{% static 'img/product-21.jpg' %}" alt="">
-								<div class="text">
-									<img src="{% static 'img/icon-hover.png' %}" alt="img">
-									<h4>Стул повышенного качества</h4>
-									<p>Не оторваться. </p>
-								</div>
-							</a>
-						</div>
-
-						<div class="block">
-							<a href="#"><img src="{% static 'img/product-31.jpg' %}" alt="">
-								<div class="text">
-									<img src="{% static 'img/icon-hover.png' %}" alt="img">
-									<h4>Стул повышенного качества</h4>
-									<p>Не оторваться. </p>
-								</div>
-							</a>
-						</div>
--->
 				</div>
 			</div>
 		</div>
