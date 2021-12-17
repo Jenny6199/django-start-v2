@@ -1,0 +1,47 @@
+[
+    {
+        "category": "стулья",
+        "name": "крепкий стул",
+        "image": "products_images/product-85.jpg",
+        "short_desc": "уверенность и неизменность традициям",
+        "description": "прочная конструкция стула придает уверенность в любой ситуации",
+        "price": 7241,
+        "quantity": 10
+    },
+    {
+        "category": "стулья",
+        "name": "мягкий стул",
+        "image": "products_images/product-84.jpg",
+        "short_desc": "почувствуйте непревзойденную мягкость бытия",
+        "description": "качественные материалы повышенного качества",
+        "price": 6870,
+        "quantity": 11
+    },
+    {
+        "category": "кресла",
+        "name": "высокое кресло",
+        "image": "products_images/product-82.jpg",
+        "short_desc": "высоко сижу - далеко гляжу.",
+        "description": "можно использовать в баре или где угодно",
+        "price": 0,
+        "quantity": 0
+    },
+    {
+        "category": "стулья",
+        "name": "удобный стул",
+        "image": "products_images/product-81.jpg",
+        "short_desc": "настоящая забота о своей осанке.",
+        "description": "отличное сочетание цены и качества.",
+        "price": 5823,
+        "quantity": 15
+    },
+    {
+        "category": "кресла",
+        "name": "кожаное кресло",
+        "image": "products_images/product-83.jpg",
+        "short_desc": "для тех кто любит настоящий комфорт.",
+        "description": "изготовлено из шкуры последнего мамонта заблудившегося в брянских лесах.",
+        "price": 15072,
+        "quantity": 1
+    }
+]
