@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import mainapp.views as mainapp
+import basketapp.views as basketapp
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
@@ -27,7 +28,10 @@ urlpatterns = [
     path('contact/', mainapp.contact, name='contact'),
     path('empty/', mainapp.products, name='empty'),
     path('auth/', include('authapp.urls', namespace='auth')),
-    path('basket/', include('basketapp.urls', namespace='basket')),
+    path('basket/', basketapp.basket, name='add'),
+    path('basket/add/<int:pk>)/', basketapp.basket_add, name='add'),
+    path('basket/remove/<int:pk>', basketapp.basket_remove, name='remove'),
+    #path('basket/', include('basketapp.urls', namespace='basket'))
 ]
 
 if settings.DEBUG:

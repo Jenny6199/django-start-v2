@@ -1,12 +1,14 @@
-# from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, render
-# from basketapp.models import Basket
-# from mainapp.models import Product
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, render
+from basketapp.models import Basket
+from mainapp.models import Product
 
 # Create your views here.
 
-""" def basket(request):
+
+def basket(request):
     content =  {}
     return render(request, 'basketapp/basket.html', content)
+
 
 def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -24,16 +26,4 @@ def basket_add(request, pk):
 
 def basket_remove(request, pk):
     content = {}
-    return render(request, 'basketapp/basket.html', content) """
-
-
-def basket(request):
-    pass
-
-
-def basket_add(request):
-    pass
-
-
-def basket_remove(request):
-    pass
+    return render(request, 'basketapp/basket.html', content)
