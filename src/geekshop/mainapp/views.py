@@ -20,12 +20,6 @@ def products(request, pk=None):
 
     title = 'продукты'
 
-    related_products = [
-        {'href': '#', 'image': 'img/product-11.jpg'},
-        {'href': '#', 'image': 'img/product-21.jpg'},
-        {'href': '#', 'image': 'img/product-31.jpg'},
-    ]
-
     small_images = [
         {'href': '#', 'image': 'img/controll.jpg'},
         {'href': '#', 'image': 'img/controll1.jpg'},
@@ -36,17 +30,17 @@ def products(request, pk=None):
 
     if pk is not None:
         if pk == 0:
-            products = Product.objects.all().order_by('price')
+            our_products = Product.objects.all().order_by('price')
             category = {'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('price')
+            our_products = Product.objects.filter(category__pk=pk).order_by('price')
 
         content = {
             'title': title,
             'links_menu': links_menu,
             'category': category,
-            'products': products,
+            'products': our_products,
             'small_images': small_images,
         }
 

@@ -48,8 +48,17 @@
 					<a class="explore" href="#">показать все <img src="{% static 'img/arrow.png' %}" alt=""></a>
 				</div>
 				<div class="related-products clearfix">
-					{% for link in related_products %}
-						{% include 'includes/inc-related-products.html' %}
+					{% for product in products %}
+						<div class="block">
+							<a href="#">
+								<img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+								<div class="text">
+									<h3>{{ product.category.name }}</h3>
+									<h4>{{ product.name }}</h4>
+									<p>{{ product.description }}</p>
+								</div>
+							</a>
+						</div>
 					{% endfor %}
 				</div>
 			</div>
