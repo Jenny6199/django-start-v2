@@ -14,7 +14,8 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
-def products(request):
+def products(request, pk=None):
+    print(pk)
 
     title = 'продукты'
 
