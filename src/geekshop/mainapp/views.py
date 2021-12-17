@@ -32,7 +32,6 @@ def products(request, pk=None):
         {'href': '#', 'image': 'img/controll2.jpg'},
     ]
 
-
     links_menu = ProductCategory.objects.all()
 
     if pk is not None:
@@ -45,7 +44,7 @@ def products(request, pk=None):
 
         content = {
             'title': title,
-            'linsk_menu': links_menu,
+            'links_menu': links_menu,
             'category': category,
             'products': products,
             'small_images': small_images,
