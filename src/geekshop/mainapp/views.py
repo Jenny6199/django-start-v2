@@ -31,19 +31,18 @@ def products(request, pk=None):
         {'href': '#', 'image': 'img/controll2.jpg'},
     ]
 
-    links_menu = [
-        {'href': 'products', 'name': 'все'},
-        {'href': 'products', 'name': 'дом'},
-        {'href': 'products', 'name': 'офис'},
-        {'href': 'products', 'name': 'модерн'},
-        {'href': 'products', 'name': 'классика'},
-    ]
+    categories_menu = []
+
+    categories = ProductCategory.objects.all()
+    for item in categories:
+        category_info = {'href': 'empty', 'name': item.name}
+        categories_menu.append(category_info)
 
     content = {
         'title': title,
         'related_products': related_products,
         'small_images': small_images,
-        'links_menu': links_menu
+        'links_menu': categories_menu,
     }
 
     return render(request, 'mainapp/products.html', content)
