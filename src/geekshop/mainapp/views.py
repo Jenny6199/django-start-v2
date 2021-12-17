@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product
+from django.shortcuts import get_object_or_404
 
 
 def main(request):
@@ -31,18 +32,34 @@ def products(request, pk=None):
         {'href': '#', 'image': 'img/controll2.jpg'},
     ]
 
-    categories_menu = []
 
-    categories = ProductCategory.objects.all()
-    for item in categories:
-        category_info = {'href': 'empty', 'name': item.name}
-        categories_menu.append(category_info)
+    links_menu = ProductCategory.objects.all()
+
+    if pk is not None:
+        if pk == 0:
+            products = Product.objects.all().order_by('price')
+            category = {'name': 'все'}
+        else:
+            category = get_object_or_404(ProductCategory, pk=pk)
+            products = Product.objects.filter(category__pk=pk).order_by('price')
+
+        content = {
+            'title': title,
+            'linsk_menu': links_menu,
+            'category': category,
+            'products': products,
+            'small_images': small_images,
+        }
+
+        return render(request, 'mainapp/products_list.html', content)
+
+    same_products = Product.objects.all()[3:5]
 
     content = {
         'title': title,
-        'related_products': related_products,
+        'links_menu': links_menu,
+        'same_products': same_products,
         'small_images': small_images,
-        'links_menu': categories_menu,
     }
 
     return render(request, 'mainapp/products.html', content)
