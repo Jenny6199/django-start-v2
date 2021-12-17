@@ -6,7 +6,7 @@ from mainapp.models import Product
 
 
 def basket(request):
-    content =  {}
+    content = {}
     return render(request, 'basketapp/basket.html', content)
 
 

@@ -14,19 +14,19 @@
                 {% include 'includes/inc-categories-menu.html' %}
             </div>
 
-            <div class="products_list">
+            <div class="category-products list">
                 <div class="title clearfix">
                     <h2>
                         Категория: "{{ category.name|title }}"
                     </h2>
                 </div>
 
-                <div class="product-list clearfix">
+                <div class="tab-content clearfix">
 
                     {% for product in products %}
                         <div class="block">
-                            <a href="#">
-                                <img src="/media/{{ product.image}}" alt="product-image">
+                            <a href="{% url 'basket:add' product.pk %}">
+                                <img src="/media/{{ product.image}}" alt=" {{ product.short_desc }}">
                                 <div class="text">
                                     <img src="{% static 'img/icon-hover.png'%}" alt="hover">
                                     <h4> {{ product.name }} </h4>
@@ -39,8 +39,6 @@
                 </div>
             </div>
         </div>
-
-        
         <div class="clr"></div>
     </div>
 {% endblock content %}

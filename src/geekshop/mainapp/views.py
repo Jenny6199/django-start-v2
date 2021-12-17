@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product
 from django.shortcuts import get_object_or_404
+from basketapp.models import Basket
 
 
 def main(request):
@@ -28,7 +29,12 @@ def products(request, pk=None):
 
     links_menu = ProductCategory.objects.all()
 
-    if pk is not None:
+    basket = []
+
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+
+    if pk:
         if pk == 0:
             our_products = Product.objects.all().order_by('price')
             category = {'name': 'все'}
@@ -42,6 +48,7 @@ def products(request, pk=None):
             'category': category,
             'products': our_products,
             'small_images': small_images,
+            'basket': basket,
         }
 
         return render(request, 'mainapp/products_list.html', content)
