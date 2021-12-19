@@ -2,6 +2,24 @@ from django.shortcuts import render
 from .models import ProductCategory, Product
 from django.shortcuts import get_object_or_404
 from basketapp.models import Basket
+import random
+
+
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    else:
+        return []
+
+
+def get_hot_product():
+    products_all = Product.objects.all()
+    return random.sample(list(products_all), 1)[0]
+
+
+def get_same_products(hot_product):
+    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+    return same_products
 
 
 def main(request):
