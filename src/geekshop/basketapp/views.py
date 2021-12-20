@@ -34,4 +34,4 @@ def basket_remove(request, pk):
     basket_record = get_object_or_404(Basket, pk=pk)
     basket_record.delete()
 
-    return HttpResponseRedirect(requests.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
