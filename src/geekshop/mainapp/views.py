@@ -47,7 +47,6 @@ def products(request, pk=None):
 
     links_menu = ProductCategory.objects.all()
 
-    #    basket = []
     basket = get_basket(request.user)
 
     if request.user.is_authenticated:
@@ -89,3 +88,16 @@ def products(request, pk=None):
 
 def contact(request):
     return render(request, 'mainapp/contact.html')
+
+
+def product(request, pk):
+    title = 'продукты'
+
+    content = {
+        'title': title,
+        'links_menu': ProductCategory.objects.all(),
+        'product': get_object_or_404(Product, pk=pk),
+        'basket': get_basket(request.user),
+    }
+
+    return render(request, 'mainapp/product.html', content)
