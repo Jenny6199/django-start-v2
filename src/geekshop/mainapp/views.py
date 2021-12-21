@@ -38,24 +38,17 @@ def products(request, pk=None):
     print(pk)
 
     title = 'продукты'
-
-    small_images = [
-        {'href': '#', 'image': 'img/controll.jpg'},
-        {'href': '#', 'image': 'img/controll1.jpg'},
-        {'href': '#', 'image': 'img/controll2.jpg'},
-    ]
-
     links_menu = ProductCategory.objects.all()
-
     basket = get_basket(request.user)
+    our_products = Product.objects.all()
 
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
 
-    if pk:
+    if pk is not None:
         if pk == 0:
-            our_products = Product.objects.all().order_by('price')
             category = {'name': 'все'}
+            our_products = Product.objects.all().order_by('price')
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
             our_products = Product.objects.filter(category__pk=pk).order_by('price')
@@ -65,7 +58,6 @@ def products(request, pk=None):
             'links_menu': links_menu,
             'category': category,
             'products': our_products,
-            'small_images': small_images,
             'basket': basket,
         }
 
@@ -79,7 +71,7 @@ def products(request, pk=None):
         'links_menu': links_menu,
         'hot_products': hot_product,
         'same_products': same_products,
-        'small_images': small_images,
+        'products': our_products,
         'basket': basket,
     }
 
