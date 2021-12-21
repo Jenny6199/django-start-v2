@@ -4,13 +4,13 @@ from django.urls import reverse
 from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterForm
 
 
-# Create your views here.
-
-
 def login(request):
     title = 'вход'
 
-    login_form = ShopUserLoginForm(data=request.POST)
+    login_form = ShopUserLoginForm(data=request.POST or None)
+
+    next = request.GET['next'] if 'next' in request.GET.keys() else ''
+
     if request.method == 'POST' and login_form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
@@ -18,9 +18,17 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('main'))
+            if 'next' in request.POST.keys():
+                return HttpResponseRedirect(request.POST['next'])
+            else:
+                return HttpResponseRedirect(reverse('main'))
 
-    content = {'title': title, 'login_form': login_form}
+    content = {
+        'title': title,
+        'login_form': login_form,
+        'next': next,
+    }
+
     return render(request, 'authapp/login.html', content)
 
 
