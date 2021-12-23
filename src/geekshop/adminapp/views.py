@@ -6,7 +6,7 @@ from mainapp.models import Product, ProductCategory
 def users(request):
     title = 'админка/пользователи'
 
-    users_list = ShopUser.objects.all().order_by('-is_active', '-is_superuser', 'is_staff', username)
+    users_list = ShopUser.objects.all().order_by('-is_active', '-is_superuser', 'is_staff', 'username')
 
     content = {
         'title': title,
