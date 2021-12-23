@@ -19,3 +19,12 @@ def users(request):
 def user_create(request):
     pass
 
+
+def user_update(request):
+    pass
+
+
+def user_delete(request):
+    pass
+
+
