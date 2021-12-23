@@ -66,3 +66,19 @@ def products(request, pk):
     }
 
     return render(request, 'adminapp/products.html', content)
+
+
+def product_create(request, pk):
+    pass
+
+
+def product_read(request, pk):
+    pass
+
+
+def product_update(request, pk):
+    pass
+
+
+def product_delete(request, pk):
+    pass
