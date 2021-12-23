@@ -28,3 +28,14 @@ def user_delete(request):
     pass
 
 
+def categories(request):
+    title = 'админка/категории'
+
+    categories_list = ProductCategory.objects.all()
+
+    content ={
+        'title': title,
+        'objects': categories_list,
+    }
+
+    return render(request, 'adminapp/categories.html', content)
