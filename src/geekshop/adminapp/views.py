@@ -33,7 +33,7 @@ def categories(request):
 
     categories_list = ProductCategory.objects.all()
 
-    content ={
+    content = {
         'title': title,
         'objects': categories_list,
     }
