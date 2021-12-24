@@ -62,7 +62,22 @@ def user_update(request):
 
 
 def user_delete(request):
-    pass
+    title = 'пользователи/удаление'
+
+    user = get_object_or_404(ShopUser, pk=pk)
+    if request.method == 'POST':
+        # user.delete()
+        # делаем пользователя неактивным, чтобы записи сохранялись
+        user.is_active = False
+        user.save()
+        return HttpResponseRedirect(reverse('admin:users'))
+
+    content = {
+        'title': title,
+        'user_to_delete': user,
+    }
+
+    return render(request, 'adminapp/user_delete.html', content)
 
 
 def categories(request):
