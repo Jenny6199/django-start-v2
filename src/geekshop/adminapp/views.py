@@ -24,7 +24,7 @@ def users(request):
 def user_create(request):
     title = 'пользователи/создание'
 
-    if request.method = 'POST':
+    if request.method == 'POST':
         user_form = ShopUserRegisterForm(request.POST, request.FILES)
         if user_form.is_valid():
             user_form.save()
@@ -40,7 +40,7 @@ def user_create(request):
     return render(request, 'adminapp/user_update.html', content)
 
 
-def user_update(request):
+def user_update(request, pk):
     title = 'пользователи/редактирование'
 
     edit_user = get_object_or_404(ShopUser, pk=pk)
@@ -61,7 +61,7 @@ def user_update(request):
     return render(request, 'adminapp/user_update.html', content)
 
 
-def user_delete(request):
+def user_delete(request, pk):
     title = 'пользователи/удаление'
 
     user = get_object_or_404(ShopUser, pk=pk)
