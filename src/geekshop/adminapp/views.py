@@ -34,14 +34,31 @@ def user_create(request):
 
     content = {
         'title': title,
-        'update_form': user_form
+        'update_form': user_form,
     }
 
     return render(request, 'adminapp/user_update.html', content)
 
 
 def user_update(request):
-    pass
+    title = 'пользователи/редактирование'
+
+    edit_user = get_object_or_404(ShopUser, pk=pk)
+    if request.method == 'POST':
+        edit_form = ShopUserAdminEditForm(request.POST, request.FILES, instance=edit_user)
+
+        if edit_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse('admin:user_update', args=[edit_user.pk]))
+    else:
+        edit_form = ShopUserAdminEditForm(instance=edit_user)
+
+    content = {
+        'title': title,
+        'update_form': edit_form,
+    }
+
+    return render(request, 'adminapp/user_update.html', content)
 
 
 def user_delete(request):
