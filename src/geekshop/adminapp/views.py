@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from authapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
 from django.contrib.auth.decorators import user_passes_test
+from django.urls import reverse
+from authapp.forms import ShopUserRegisterForm
+from adminapp.forms import ShopUserAdminEditForm
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -19,7 +22,22 @@ def users(request):
 
 
 def user_create(request):
-    pass
+    title = 'пользователи/создание'
+
+    if request.method = 'POST':
+        user_form = ShopUserRegisterForm(request.POST, request.FILES)
+        if user_form.is_valid():
+            user_form.save()
+            return HttpResponseRedirect(reverse('admin:users'))
+    else:
+        user_form = ShopUserRegisterForm()
+
+    content = {
+        'title': title,
+        'update_form': user_form
+    }
+
+    return render(request, 'adminapp/user_update.html', content)
 
 
 def user_update(request):
