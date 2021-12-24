@@ -94,14 +94,29 @@ def categories(request):
 
 
 def category_create(request):
+    title = 'категории/создание'
+
+    if request.method == 'POST':
+        category_form = ""
+        if category_form.is_valid():
+            category_form.save()
+            return HttpResponseRedirect(reverse('admin:category'))
+    else:
+        category_form = ""
+
+    content = {
+        'title': title,
+        'update_form': category_form,
+    }
+
+    return render(request, 'adminapp/user_update.html', content)
+
+
+def category_update(request, pk):
     pass
 
 
-def category_update(request):
-    pass
-
-
-def category_delete(request):
+def category_delete(request, pk):
     pass
 
 

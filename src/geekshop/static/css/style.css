@@ -1075,3 +1075,7 @@ td:first-child {
 .mw100 {
     max-width: 100%
 }
+
+.category_record.not_active {
+    opacity: 0.5;
+}
