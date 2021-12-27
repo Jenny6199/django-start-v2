@@ -101,7 +101,7 @@ def category_create(request):
         category_form = ProductCategoryCreateForm(request.POST, request.FILES)
         if category_form.is_valid():
             category_form.save()
-            return HttpResponseRedirect(reverse('admin:category'))
+            return HttpResponseRedirect(reverse('admin:categories'))
     else:
         category_form = ProductCategoryCreateForm()
 
