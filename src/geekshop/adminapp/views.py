@@ -167,6 +167,14 @@ def products(request, pk):
     return render(request, 'adminapp/products.html', content)
 
 
+def product_read(request, pk):
+    title = 'продукт/подробнее'
+    product = get_object_or_404(Product, pk=pk)
+    content = {'title': title, 'object': product,}
+
+    return render(request, 'adminapp/product_read.html', content)
+
+
 def product_create(request, pk):
     pass
 
