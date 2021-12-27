@@ -113,7 +113,24 @@ def category_create(request):
 
 
 def category_update(request, pk):
-    pass
+    title = 'категории/редактирование'
+
+    edit_category = get_object_or_404(ProductCategory, pk=pk)
+    if request.method == 'POST':
+        edit_form = ProductCategoryEditForm(request.POST, request.FILES, instance=edit_category)
+
+        if edit_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse('admin:category_update', args=[edit_category.pk]))
+    else:
+        edit_form = ProductCategoryEditForm(instance=edit_category)
+
+    content = {
+        'title': title,
+        'update_form': edit_form,
+    }
+
+    return render(request, 'adminapp/category_update.html', content)
 
 
 def category_delete(request, pk):
