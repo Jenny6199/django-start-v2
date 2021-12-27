@@ -1,15 +1,18 @@
-{% extends 'authapp/base.html' %}
+{% extends 'adminapp/base.html' %}
 {% load static %}
 
 {% block content %}
-    <form class="form-horizontal" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ update_form.as_p }}
-        <input type="submit" class="form-control" value="сохранить">
-    </form>
-    <button class="btn btn-round form-control last">
-        <a href="{% url 'admin:users' %}">
-            к списку категорий
-        </a>
-    </button>
+    <div class="categories_list">
+        <h3>Редактирование категории</h3>
+        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ update_form.as_p }}
+            <input type="submit" class="form-control" value="сохранить">
+        </form>
+        <button class="btn btn-round form-control last">
+            <a href="{% url 'admin:categories' %}">
+                к списку категорий
+            </a>
+        </button>
+    </div>
 {% endblock content %}

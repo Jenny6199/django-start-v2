@@ -4,8 +4,7 @@ from mainapp.models import Product, ProductCategory
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
-from adminapp.forms import ShopUserAdminEditForm
-from mainapp.forms import ProductCategoryCreateForm
+from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -98,12 +97,12 @@ def category_create(request):
     title = 'категории/создание'
 
     if request.method == 'POST':
-        category_form = ProductCategoryCreateForm(request.POST, request.FILES)
+        category_form = ProductCategoryEditForm(request.POST, request.FILES)
         if category_form.is_valid():
             category_form.save()
             return HttpResponseRedirect(reverse('admin:categories'))
     else:
-        category_form = ProductCategoryCreateForm()
+        category_form = ProductCategoryEditForm()
 
     content = {
         'title': title,
