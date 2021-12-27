@@ -4,7 +4,7 @@ from mainapp.models import Product, ProductCategory
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
-from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm
+from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, ProductEditForm
 
 
 @user_passes_test(lambda u: u.is_superuser)
