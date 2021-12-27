@@ -21,6 +21,7 @@ def users(request):
     return render(request, 'adminapp/users.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def user_create(request):
     title = 'пользователи/создание'
 
@@ -40,6 +41,7 @@ def user_create(request):
     return render(request, 'adminapp/user_update.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def user_update(request, pk):
     title = 'пользователи/редактирование'
 
@@ -61,6 +63,7 @@ def user_update(request, pk):
     return render(request, 'adminapp/user_update.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def user_delete(request, pk):
     title = 'пользователи/удаление'
 
@@ -80,6 +83,7 @@ def user_delete(request, pk):
     return render(request, 'adminapp/user_delete.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def categories(request):
     title = 'админка/категории'
 
@@ -93,6 +97,7 @@ def categories(request):
     return render(request, 'adminapp/categories.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_create(request):
     title = 'категории/создание'
 
@@ -112,6 +117,7 @@ def category_create(request):
     return render(request, 'adminapp/category_update.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_update(request, pk):
     title = 'категории/редактирование'
 
@@ -133,6 +139,7 @@ def category_update(request, pk):
     return render(request, 'adminapp/category_update.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_delete(request, pk):
     title = 'категории/удаление'
 
@@ -152,6 +159,7 @@ def category_delete(request, pk):
     return render(request, 'adminapp/category_delete.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def products(request, pk):
     title = 'админка/продукт'
 
@@ -167,14 +175,16 @@ def products(request, pk):
     return render(request, 'adminapp/products.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_read(request, pk):
     title = 'продукт/подробнее'
     product = get_object_or_404(Product, pk=pk)
-    content = {'title': title, 'object': product,}
+    content = {'title': title, 'object': product, }
 
     return render(request, 'adminapp/product_read.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_create(request, pk):
     title = 'продукт/создание'
     category = get_object_or_404(ProductCategory, pk=pk)
@@ -196,6 +206,7 @@ def product_create(request, pk):
     return render(request, 'adminapp/product_update.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_update(request, pk):
     title = 'продукт/редактирование'
     edit_product = get_object_or_404(Product, pk=pk)
@@ -217,6 +228,7 @@ def product_update(request, pk):
     return render(request, 'adminapp/product_update.html', content)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_delete(request, pk):
     title = 'продукт/удаление'
     product = get_object_or_404(Product, pk=pk)
