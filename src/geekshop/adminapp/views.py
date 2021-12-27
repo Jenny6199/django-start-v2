@@ -110,7 +110,7 @@ def category_create(request):
         'update_form': category_form,
     }
 
-    return render(request, 'adminapp/category_create.html', content)
+    return render(request, 'adminapp/category_update.html', content)
 
 
 def category_update(request, pk):
