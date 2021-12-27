@@ -3,16 +3,22 @@
 
 {% block content %}
     <div class="categories_list">
-        <button class="new_category">
-            <a href="{% url 'admin:category_create' %}">
-                новая категория
-            </a>
-        </button>
+        <div class="block">
+             <button class="new_category">
+                <a href="{% url 'admin:category_create' %}">
+                    новая категория
+                </a>
+            </button>
+        </div>
+
 
         {% for object in objects %}
-            <div class="category_record {% if not object.is_active %}not_active {% endif %}">
+            <div class="category_record block {% if not object.is_active %}not_active {% endif %}">
                 <div class="category_name">
                     {{ object.name|title }}
+                </div>
+                <div class="category_desc">
+                    {{ object.description|title }}
                 </div>
                 <div class="category_actions">
                     <button>
@@ -30,9 +36,6 @@
                             удалить
                         </a>
                     </button>
-                </div>
-                <div class="category_desc">
-                    {{ object.description|title }}
                 </div>
             </div>
         {% endfor %}
