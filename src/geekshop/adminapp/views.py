@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, ProductEditForm
+from django.views.generic.list import ListView
+from django.utils.decorators import method_decorator
 
 
 @user_passes_test(lambda u: u.is_superuser)
