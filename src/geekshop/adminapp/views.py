@@ -237,9 +237,10 @@ def product_delete(request, pk):
         product.is_active = False
         product.save()
         return HttpResponseRedirect(reverse('admin:products', args=[product.category.pk]))
+
     content = {
         'title': title,
-        'product_to_delete': product,
+        'product_to_delete': product
     }
 
     return render(request, 'adminapp/product_delete.html', content)
