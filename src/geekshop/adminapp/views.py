@@ -14,7 +14,7 @@ class UsersListView(ListView):
     template_name = 'adminapp/users.html'
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
-    def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
 
