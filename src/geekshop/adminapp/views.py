@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from authapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
 from django.contrib.auth.decorators import user_passes_test
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, ProductEditForm
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView
 from django.utils.decorators import method_decorator
 
 
