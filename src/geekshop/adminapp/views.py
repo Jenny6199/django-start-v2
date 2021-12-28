@@ -9,6 +9,15 @@ from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
 
 
+class UsersListView(ListView):
+    model = ShopUser
+    template_name = 'adminapp/users.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
 @user_passes_test(lambda u: u.is_superuser)
 def users(request):
     title = 'админка/пользователи'
