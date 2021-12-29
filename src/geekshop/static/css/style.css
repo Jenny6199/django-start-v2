@@ -1072,6 +1072,44 @@ td:first-child {
 	display: block;
 }
 
-.mw100 {
+.mw100{
     max-width: 100%
+}
+
+.not_active{
+    opacity: 0.5;
+}
+
+
+.admin_container{
+    width: 1140px;
+    margin: 0 auto;
+}
+
+.categories_list{
+    width: 100%;
+    margin-top: 20vh;
+}
+
+.view_frame{
+    padding: 10px;
+    margin: 5px auto;
+    border: 1px dotted black;
+    background-color: skyblue;
+}
+
+.category_name{
+    font-weight: bold;
+}
+
+.base_back{
+    background-color: navy;
+    color: white;
+    padding: 35px;
+    font-weight: bold;
+}
+
+.avatar_size{
+    display: flex;
+    max-width: 250 px;
 }
