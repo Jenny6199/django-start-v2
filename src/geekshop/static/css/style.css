@@ -1113,3 +1113,21 @@ td:first-child {
     display: flex;
     max-width: 250 px;
 }
+
+.buttons_flex{
+    display: flex;
+    justify-content: space-around;
+    width: 70vh;
+    margin: 0 auto;
+}
+
+.flex_content{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.medium_image{
+    max-width: 300px;
+    max-height:300px;
+}
