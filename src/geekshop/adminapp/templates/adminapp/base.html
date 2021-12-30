@@ -20,27 +20,33 @@
             <script src="{% static 'js/basket_scripts.js' %}"></script>
         {% endblock %}
     </head>
+    <div class="wrapper">
+        <body>
+             <div class="admin_container">
+                 <div class="h2 text-center head base_back" id="top">
+                     Панель администратора
+                 </div>
+                 {% block menu %}
+                    <div class="admin_menu">
+                        {% include 'adminapp/includes/inc_menu.html' %}
+                    </div>
+                 {% endblock menu %}
 
-    <body>
-         <div class="admin_container">
-             <div class="h2 text-center head base_back" id="top">
-                 Панель администратора
-             </div>
-             {% block menu %}
-                <div class="admin_menu">
-                    {% include 'adminapp/includes/inc_menu.html' %}
-                </div>
-             {% endblock menu %}
-
-             {% block content %}
-             {% endblock content %}
-             <div class="view_frame">
-                 <div class="card_actions">
-                     <button class="card_button">
-                         <a href="#top">Вверх</a>
-                     </button>
+                 {% block content %}
+                 {% endblock content %}
+                 <div class="view_frame">
+                     <div class="card_actions">
+                         <button class="card_button">
+                             <a href="#top">Вверх</a>
+                         </button>
+                     </div>
                  </div>
              </div>
-         </div>
-    </body>
+        </body>
+    </div>
+    <footer class="footer base_back flex_content">
+        <p>Справочная информация.</p>
+        <p>Все права защищены.</p>
+        <p>&#169&nbsp2021</p>
+    </footer>
 </html>
