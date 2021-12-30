@@ -23,7 +23,7 @@
 
     <body>
          <div class="admin_container">
-             <div class="h2 text-center head base_back">
+             <div class="h2 text-center head base_back" id="top">
                  Панель администратора
              </div>
              {% block menu %}
@@ -34,6 +34,13 @@
 
              {% block content %}
              {% endblock content %}
+             <div class="view_frame">
+                 <div class="card_actions">
+                     <button class="card_button">
+                         <a href="#top">Вверх</a>
+                     </button>
+                 </div>
+             </div>
          </div>
     </body>
 </html>
