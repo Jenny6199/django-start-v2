@@ -1111,7 +1111,9 @@ td:first-child {
 
 .avatar_size{
     display: flex;
-    max-width: 250 px;
+    width: 200px;
+    height: 200px;
+    margin: 16px;
 }
 
 .buttons_flex{
