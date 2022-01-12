@@ -20,6 +20,22 @@ class UsersListView(ListView):
         return super().dispatch(*args, **kwargs)
 
 
+class UserCreateView(CreateView):
+    pass
+
+
+class UserUpdateView(UpdateView):
+    model = ShopUser
+    template_name = 'adminapp/user_update.html'
+    success_url = reverse_lazy('admin:user_update')
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'пользователь/редактирование'
+        return context
+
+
 class ProductCategoryCreateView(CreateView):
     model = ProductCategory
     template_name = 'adminapp/category_update.html'
@@ -36,7 +52,6 @@ class ProductCategoryUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'категории/редактирование'
-
         return context
 
 
