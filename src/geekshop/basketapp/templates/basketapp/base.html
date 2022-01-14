@@ -22,17 +22,28 @@
     </head>
 
     <body>
-        <div class="basket_container">
-            <div class="h2 text-center head">
-                Ваша корзина
-                {% if user.first_name %}
-                    {{ user.first_name|title }}
-                {% else %}
-                    Пользователь
-                {% endif %}
+        <div class="wrapper">
+            <div class="admin_container">
+                <div class="h2 text-center head base_back">
+                    <p>Ваша корзина</p>
+                    </br>
+                    <h3>
+                        {% if user.first_name %}
+                            {{ user.first_name|title }}
+                        {% else %}
+                            Пользователь
+                        {% endif %}
+                    </h3>
+                </div>
+                {% block content %}
+                {% endblock content %}
             </div>
-           {% block content %}
-            {% endblock content %}
         </div>
     </body>
+
+    <footer class="admin-footer base_back flex_content">
+        <p>Справочная информация.</p>
+        <p>Все права защищены.</p>
+        <p>&#169&nbsp2021</p>
+    </footer>
 </html>

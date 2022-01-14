@@ -82,11 +82,12 @@ html, body {
 }
 .basket {
 	display: block;
-	width: 23px;
+	width: 150px;
 	height: 23px;	
 	background-image: url(/static/img/basket.png);
+	background-repeat: no-repeat;
 	position: absolute;
-	top: 63px;
+	top: 65px;
 	left: 1210px;
 }
 
@@ -1166,8 +1167,14 @@ td:first-child {
     min-height:89vh;
 }
 
-.footer{
+.admin-footer{
     width: 1140px;
     margin: 0 auto;
     max-height: 11vh;
+}
+
+.basket_record{
+    border: 1px dotted navi;
+    padding: 16px;
+    background-color: skyblue;
 }
