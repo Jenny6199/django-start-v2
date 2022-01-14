@@ -28,6 +28,7 @@
       </ul>
       <a href="#" class="search"></a>
       <a href=" {% url 'basket:view' %}" class="basket">
+          </br>
           <span>
               {% if basket %}
                 ({{ basket.0.total_cost|floatformat:0 }} руб)
