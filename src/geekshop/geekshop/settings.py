@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.mail import send_mail
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -140,6 +141,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'authapp.ShopUser'
 
 LOGIN_URL = '/auth/login/'
+
+send_mail("first_mail", "Hello world!", "admin@localhost", ["Superuser@localhost", ])
 
 #   E-mail. Settings SMTP-server.
 DOMAIN_NAME = 'http://localhost:8000'
