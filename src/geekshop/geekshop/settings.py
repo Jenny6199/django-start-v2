@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from django.core.mail import send_mail
+from django.core.mail import send_mail, backends
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -146,15 +146,23 @@ LOGIN_URL = '/auth/login/'
 DOMAIN_NAME = 'http://localhost:8000'
 
 # 1. Вариант отправки сообщений на реальный сервер.
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '25'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
 # EMAIL_HOST_USER = 'django@geekshop.local'
 # EMAIL_HOST_PASSWORD = 'geekshop'
-EMAIL_USE_SSL = False
+# EMAIL_USE_SSL = False
 
 #   2. Вариант python -m smtpd -n -c DebuggingServer localhost:25
-EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
 #   Вариант логирования сообщений почты в виде файлов вместо отправки
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+# send_mail(
+#     'test_letter',
+#     'This is test letter for debugging.',
+#     'admin@localhost',
+#     ["test_box@localhost", "test_box2@localhost"],
+#     fail_silently=False
+# )
