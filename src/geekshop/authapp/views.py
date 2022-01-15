@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterForm
+from django.core.mail import send_mail
+from django.conf import settings
+from authapp.models import ShopUser
 
 
 def login(request):
@@ -68,3 +71,16 @@ def edit(request):
     content = {'title': title, 'edit_form': edit_form}
 
     return render(request, 'authapp/edit.html', content)
+
+
+def send_verify_mail(user):
+    verify_link = reverse(
+        'auth:verify',
+        args=[user.email, user.activation_key])
+    title = f'Подтверждение учетной записи {user.username}'
+    message = f'Для подтверждения учетной записи ' \
+              f'{user.username} на портале' \
+              f'{settings.DOMAIN_NAME} перейдите по ссылке:' \
+              f'\n{settings.DOMAIN_NAME}{verify_link}'
+    return send_mail(title, message, settings.EMAIL_HOST_USER,
+                     [user.email], fail_silently=False)
