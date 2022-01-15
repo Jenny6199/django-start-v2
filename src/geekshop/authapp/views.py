@@ -47,6 +47,7 @@ def register(request):
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
 
         if register_form.is_valid():
+            user = register_form.save()
             if send_verify_mail(user):
                 print('сообщение подтверждения отправлено')
                 return HttpResponseRedirect(reverse('auth:login'))
@@ -60,12 +61,12 @@ def register(request):
 
     #         register_form.save()
     #         return HttpResponseRedirect(reverse('auth:login'))
-    # else:
-    #     register_form = ShopUserRegisterForm()
-    #
-    # content = {'title': title, 'register_form': register_form}
-    #
-    # return render(request, 'authapp/register.html', content)
+    else:
+        register_form = ShopUserRegisterForm()
+
+    content = {'title': title, 'register_form': register_form}
+
+    return render(request, 'authapp/register.html', content)
 
 
 def edit(request):
