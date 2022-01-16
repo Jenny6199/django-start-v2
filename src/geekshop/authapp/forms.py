@@ -1,7 +1,10 @@
+import hashlib
+import random
+
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.forms import forms
+
 from .models import ShopUser
-import random, hashlib
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -51,9 +54,8 @@ class ShopUserEditForm(UserChangeForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
-
-    #           if field_name == 'password':
-    #               field.widget = forms.HiddenInput()
+            if field_name == 'password':
+                pass
 
     def clean_age(self):
         data = self.cleaned_data['age']

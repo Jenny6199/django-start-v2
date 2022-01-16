@@ -1,6 +1,12 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
 
+{% block page_name %}
+    <div class="h2 text-center head base_back">
+        Регистрация
+    </div>
+{% endblock page_name %}
+
 {% block content %}
     <form class='form-horizontal' action="{% url 'auth:register'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -8,4 +14,6 @@
         <br>
         <input class="form-control" type="submit" value="Зарегистрироваться">
     </form>
+    <br>
+    <a href="{% url 'main' %}">На главную</a>
 {% endblock content %}
