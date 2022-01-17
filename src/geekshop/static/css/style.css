@@ -1131,3 +1131,11 @@ td:first-child {
     max-width: 300px;
     max-height:300px;
 }
+
+.fullscreen{
+    min-height: 89vh;
+}
+
+.base_footer{
+    min-height: 10vh;
+}
