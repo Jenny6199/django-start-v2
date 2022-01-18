@@ -58,7 +58,7 @@ class ProductCategoryUpdateView(UpdateView):
 class ProductCategoryDeleteView(DeleteView):
     model = ProductCategory
     template_name = 'adminapp/category_delete.html'
-    success_url = reverse_lazy('admin:categories')
+    success_url = reverse_lazy('admin:categories_delete')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
