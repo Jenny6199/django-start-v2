@@ -1124,7 +1124,7 @@ td:first-child {
 .flex_content{
     display: flex;
     justify-content: space-around;
-    margin: 20px;
+    margin: 0px;
 }
 
 .medium_image{
