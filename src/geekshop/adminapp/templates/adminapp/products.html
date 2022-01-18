@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="products_list">
+    <div class="products_list categories_list">
         <button class="new_product">
                     <a href="{% url 'admin:product_create' category.pk %}">
             новый продукт
@@ -10,7 +10,7 @@
         </button>
 
         {% for object in objects %}
-            <div class="product_record">
+            <div class="product_record view_frame">
                 <img src="/media/{{object.image|default:'product_images/default.jpg'}}"
                      alt="{{ object.name }}">
                 <div class="product_name">
