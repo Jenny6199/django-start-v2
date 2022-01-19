@@ -8,16 +8,35 @@
 {% endblock page_name %}
 
 {% block content %}
-    <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
-        {% csrf_token %}
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}">
-        {% endif %}
-        {{ login_form.as_p }}
+    <div class="admin_container">
+        <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+            {% csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+            {{ login_form.as_p }}
+            <br>
+            <input class="form-control" type="submit" value="войти">
+        </form>
         <br>
-        <input class="form-control" type="submit" value="войти">
-    </form>
-    <br>
-    <a href="{% url 'auth:register' %}">Зарегистрироваться</a>
-    <a href="{% url 'main' %}">На главную</a>
+        <div class="flex_content view_frame">
+            <button class="btn btn-round form-control">
+                <a href="{% url 'auth:register' %}">
+                    Зарегистрироваться
+                </a>
+            </button>
+
+            <button class="btn btn-round form-control">
+                <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+                    Вход через ВКонтакте
+                </a>
+            </button>
+
+                    <button class="btn btn-round form-control">
+                <a href="{% url 'main' %}">
+                    На главную
+                </a>
+            </button>
+        </div>
+    </div>
 {% endblock content %}
