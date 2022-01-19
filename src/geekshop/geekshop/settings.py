@@ -178,7 +178,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
 )
 
-with open('geekshop/vk.json', 'r') as pass_path:
+with open('vk_pass.json', 'r') as pass_path:
     VK = json.load(pass_path)
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
