@@ -5,9 +5,12 @@ from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterF
 from django.core.mail import send_mail
 from django.conf import settings
 from authapp.models import ShopUser
+from django.db import transaction
+from authapp.forms import ShopUserProfileEditForm
 
 
 def login(request):
+    """Контроллер для страницы авторизации"""
     title = 'вход'
 
     login_form = ShopUserLoginForm(data=request.POST or None)
@@ -36,11 +39,13 @@ def login(request):
 
 
 def logout(request):
+    """Контроллер для выхода из учетной записи"""
     auth.logout(request)
     return HttpResponseRedirect(reverse('main'))
 
 
 def register(request):
+    """Контроллер для страницы регистрации"""
     title = 'регистрация'
 
     if request.method == "POST":
@@ -70,6 +75,7 @@ def register(request):
 
 
 def edit(request):
+    """Контроллер для редактирования учетной записи"""
     title = 'редактирование'
 
     if request.method == 'POST':
@@ -86,6 +92,7 @@ def edit(request):
 
 
 def send_verify_mail(user):
+    """Контроллер для отправки письма с подтверждением авторизации пользователя"""
     verify_link = reverse(
         'auth:verify',
         args=[user.email, user.activation_key])
@@ -112,3 +119,27 @@ def verify(request, email, activation_key):
     except Exception as e:
         print(f'error activation user: { e: args }')
         return HttpResponseRedirect(reverse('main'))
+
+
+@transaction.atomic
+def edit(request):
+    """Редактирование профиля пользователя"""
+    title = 'редактирование'
+
+    if request.method == 'POST':
+        edit_form = ShopUserEditForm(request.POST, request.FILES, isinstance=request.user)
+        profile_form = ShopUserProfileEditForm(request.POST, instance=request.user.shopuserprofile)
+        if edit_form.is_valid() and profile_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse('auth:edit'))
+        else:
+            edit_form = ShopUserEditForm(instance=request.user)
+            profile_form = ShopUserProfileEditForm(instance=request.user.shopuserprofile)
+
+            content = {
+                'title': title,
+                'edit_form': edit_form,
+                'profile_form': profile_form,
+            }
+
+            return render(request, 'authapp/edit.html', content)
