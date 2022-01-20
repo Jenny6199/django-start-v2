@@ -2,9 +2,10 @@ import hashlib
 import random
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from django.forms import forms
+from django.forms import forms, ModelForm
 
-from .models import ShopUser, ShopUserProfile
+from .models import ShopUser
+from .models import ShopUserProfile
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -64,7 +65,7 @@ class ShopUserEditForm(UserChangeForm):
         return data
 
 
-class ShopUserProfileEditForm(forms.ModelForm):
+class ShopUserProfileEditForm(ModelForm):
     """Редактирование профиля пользователя"""
     class Meta:
         model = ShopUserProfile
