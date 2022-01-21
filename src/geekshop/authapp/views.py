@@ -74,7 +74,6 @@ def register(request):
     return render(request, 'authapp/register.html', content)
 
 
-
 def send_verify_mail(user):
     """Контроллер для отправки письма с подтверждением авторизации пользователя"""
     verify_link = reverse(

@@ -7,7 +7,7 @@ import requests
 from django.utils import timezone
 from social_core.exceptions import AuthForbidden
 
-from authapp.models import ShopUserProfile
+from authapp.models import ShopUser, ShopUserProfile
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
@@ -20,7 +20,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         '/method/users.get',
         None,
         urlencode(OrderedDict(
-            fields=','.join(('bdate', 'sex', 'about')),
+            fields=','.join(('bdate', 'sex', 'about', 'status')),
             access_token=response['access_token'],
             v='5.92')),
         None))
@@ -33,8 +33,8 @@ def save_user_profile(backend, user, response, *args, **kwargs):
     if data['sex']:
         user.shopuserprofile.gender = ShopUserProfile.MALE if data['sex'] == 2 else ShopUserProfile.FEMALE
 
-    if data['about']:
-        user.shopuserprofile.aboutMe = data['about']
+    if data['status']:
+        user.shopuserprofile.aboutMe = data['status']
 
     if data['bdate']:
         bdate = datetime.strptime(data['bdate'], '%d.%m.%Y').date()
@@ -43,5 +43,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         if age < 18:
             user.delete()
             raise AuthForbidden('social_core.backends.vk.VKOAuth2')
+        else:
+            user.age = age
 
     user.save()
