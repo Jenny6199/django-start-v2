@@ -1,6 +1,12 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
 
+{% block page_name %}
+    <div class="h2 text-center head base_back">
+        Редактирование
+    </div>
+{% endblock page_name %}
+
 {% block content %}
     <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" ectype="miltipart/form-data">
         {% csrf_token %}
@@ -14,4 +20,7 @@
     <div class="user_avatar">
         <img src="/media/ {{ user.avatar }}">
     </div>
+    <br>
+    <a href="{% url 'main' %}">На главную</a>
 {% endblock content %}
+

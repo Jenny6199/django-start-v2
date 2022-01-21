@@ -81,13 +81,13 @@ html, body {
 	left: 1176px;
 }
 .basket {
-	display: block;
-	width: 23px;
-	height: 23px;	
-	background-image: url(/static/img/basket.png);
-	position: absolute;
-	top: 63px;
-	left: 1210px;
+    display: block;
+    width: 150px;
+    height: 23px;
+    background-image: none;
+    position: absolute;
+    top: 65px;
+    left: 1220px;
 }
 
 .clearfix:after {
@@ -1072,6 +1072,70 @@ td:first-child {
 	display: block;
 }
 
-.mw100 {
+.mw100{
     max-width: 100%
+}
+
+.not_active{
+    opacity: 0.5;
+}
+
+
+.admin_container{
+    width: 1140px;
+    margin: 0 auto;
+}
+
+.categories_list{
+    width: 100%;
+    margin-top: 20vh;
+}
+
+.view_frame{
+    padding: 10px;
+    margin: 5px auto;
+    border: 1px dotted black;
+    background-color: skyblue;
+}
+
+.category_name{
+    font-weight: bold;
+}
+
+.base_back{
+    background-color: navy;
+    color: white;
+    padding: 35px;
+    font-weight: bold;
+}
+
+.avatar_size{
+    display: flex;
+    max-width: 250 px;
+}
+
+.buttons_flex{
+    display: flex;
+    justify-content: space-around;
+    width: 70vh;
+    margin: 0 auto;
+}
+
+.flex_content{
+    display: flex;
+    justify-content: space-around;
+    margin: 0px;
+}
+
+.medium_image{
+    max-width: 300px;
+    max-height:300px;
+}
+
+.fullscreen{
+    min-height: 89vh;
+}
+
+.base_footer{
+    min-height: 10vh;
 }
