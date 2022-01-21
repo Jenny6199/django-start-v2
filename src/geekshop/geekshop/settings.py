@@ -165,14 +165,6 @@ DOMAIN_NAME = 'http://localhost:8000'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
 
-# send_mail(
-#     'test_letter',
-#     'This is test letter for debugging.',
-#     'admin@localhost',
-#     ["test_box@localhost", "test_box2@localhost"],
-#     fail_silently=False
-# )
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.vk.VKOAuth2',
@@ -181,7 +173,9 @@ AUTHENTICATION_BACKENDS = (
 with open('vk_pass.json', 'r') as pass_path:
     VK = json.load(pass_path)
 
+LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
 SOCIAL_AUTH_VK_OAUTH2_SECRET = VK['SOCIAL_AUTH_VK_OAUTH2_SECRET']
-
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/'
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
