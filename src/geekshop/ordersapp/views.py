@@ -1,13 +1,9 @@
-from django.shortcuts import render
+
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
-from django.forms import ModelForm
-
 from django.forms import inlineformset_factory
-
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.views.generic.detail import DetailView
 
 from basketapp.models import Basket
 from ordersapp.models import Order, OrderItem
@@ -29,17 +25,23 @@ class OrderItemsCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         data = super(OrderItemsCreate, self).get_context_data(**kwargs)
+
         OrderFormSet = inlineformset_factory(
             Order,
             OrderItem,
             form=OrderItemForm,
             extra=1)
+
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
         else:
             basket_items = Basket.get_items(self.request.user)
             if len(basket_items):
-                OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=len(basket_items))
+                OrderFormSet = inlineformset_factory(
+                    Order,
+                    OrderItem,
+                    form=OrderItemForm,
+                    extra=len(basket_items))
                 formset = OrderFormSet()
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
