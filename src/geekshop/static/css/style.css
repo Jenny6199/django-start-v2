@@ -76,18 +76,22 @@ html, body {
 	width: 23px;
 	height: 23px;	
 	background-image: url(/static/img/search.png);
+    background-repeat: no-repeat;
 	position: absolute;
 	top: 63px;
-	left: 1176px;
+	/* left: 1176px; */
+	margin-left: 598px;
 }
+
 .basket {
     display: block;
-    width: 150px;
+    width: 200px;
     height: 23px;
     background-image: none;
     position: absolute;
     top: 65px;
-    left: 1220px;
+    /* left: 1220px; */
+    margin-left: 625px;
 }
 
 .clearfix:after {
