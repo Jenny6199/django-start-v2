@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import json
-from django.core.mail import send_mail, backends
+#   from django.core.mail import send_mail, backends
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
