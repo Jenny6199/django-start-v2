@@ -80,4 +80,5 @@ class OrderItemsUpdate(UpdateView):
 
 class OrderDelete(DeleteView):
     """Контроллер для удаления заказа"""
-    pass
+    model = Order
+    success_url = reverse_lazy('ordersapp:orders_list')
