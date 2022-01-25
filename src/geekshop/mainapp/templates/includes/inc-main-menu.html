@@ -7,29 +7,36 @@
           <li><a href="{% url 'contact' %}">контакты</a></li>
           {% if  user.is_authenticated %}
               <li>
-                  <div class="dropdown">
-                      <a class="dropdown-toggle" href="" data-toggle="dropdown">
-                          {{ user.first_name|default:'Пользователь' }}
-                          <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a href="{% url 'auth:edit' %}">
-                                  профиль
-                              </a>
-                          </li>
-                          <li>
-                              <a href="{% url 'ordersapp:orders_list' %}">
-                                  заказы
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
+                  <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                      {{ user.first_name|default:'Пользователь' }}
+                      <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li>
+                          <a href="{% url 'auth:edit' %}">
+                              профиль
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{% url 'ordersapp:orders_list' %}">
+                              заказы
+                          </a>
+                      </li>
+                  </ul>
               </li>
-<!-- OLD -->
-<!--                  <a href="{% url 'auth:edit' %}">-->
-<!--                      {{ user.first_name|default:'Пользователь' }}-->
-<!--                  </a>-->
+          <!-- Попытка продублировать неудачна, но ссылка на заказы все равно нужна -->
+          <li>
+              <div class="dropdown">
+                  <a href="{% url 'ordersapp:orders_list' %}" class="dropdown-toggle" data-toggle="dropdown">
+                      заказы
+                  </a>
+                  <span class="caret"></span>
+                  <ul class="dropdown-menu">
+                      <li>1</li>
+                      <li>2</li>
+                  </ul>
+              </div>
+          </li>
           {% endif %}
           {% if user.is_superuser %}
               <li>
