@@ -44,7 +44,7 @@ class OrderItemsCreate(CreateView):
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
-                    basket_items.delete()
+                basket_items.delete()
             else:
                 formset = OrderFormSet()
         data['orderitems'] = formset
@@ -54,6 +54,7 @@ class OrderItemsCreate(CreateView):
         context = self.get_context_data()
         orderitems = context['orderitems']
 
+        # обеспечение атомарности операции
         with transaction.atomic():
             form.instance.user = self.request.user
             self.object = form.save()
@@ -72,6 +73,9 @@ class OrderRead(ListView):
     """Контроллер для чтения заказа"""
     model = Order
 
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
+
     def get_context_data(self, **kwargs):
         context = super(OrderRead, self).get_context_data(**kwargs)
         context['title'] = 'заказ/просмотр'
@@ -85,7 +89,7 @@ class OrderItemsUpdate(UpdateView):
     success_url = reverse_lazy('ordersapp:orders_list')
 
     def get_context_data(self, **kwargs):
-        data = super(OrderItemsCreate, self).get_context_data(instance=self.object)
+        data = super(OrderItemsCreate, self).get_context_data(self, **kwargs)
 
         OrderFormSet = inlineformset_factory(
             Order,
