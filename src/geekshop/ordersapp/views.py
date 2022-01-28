@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.forms import inlineformset_factory
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from basketapp.models import Basket
 from ordersapp.models import Order, OrderItem
 from ordersapp.forms import OrderItemForm, OrderForm
@@ -72,7 +72,7 @@ class OrderItemsCreate(CreateView):
         return super(OrderItemsCreate, self).form_valid(form)
 
 
-class OrderRead(ListView):
+class OrderRead(DetailView):
     """Контроллер для чтения заказа"""
     model = Order
 
