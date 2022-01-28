@@ -24,6 +24,7 @@ class OrderItemsCreate(CreateView):
     def get_context_data(self, **kwargs):
         data = super(OrderItemsCreate, self).get_context_data(**kwargs)
 
+        # конструктор набора форма (возвращает класс)
         OrderFormSet = inlineformset_factory(
             Order,
             OrderItem,
@@ -41,12 +42,14 @@ class OrderItemsCreate(CreateView):
                     form=OrderItemForm,
                     extra=len(basket_items))
                 formset = OrderFormSet()
+
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
                 basket_items.delete()
             else:
                 formset = OrderFormSet()
+
         data['orderitems'] = formset
         return data
 
@@ -89,17 +92,21 @@ class OrderItemsUpdate(UpdateView):
     success_url = reverse_lazy('ordersapp:orders_list')
 
     def get_context_data(self, **kwargs):
-        data = super(OrderItemsCreate, self).get_context_data(self, **kwargs)
+        data = super().get_context_data(**kwargs)
 
         OrderFormSet = inlineformset_factory(
             Order,
             OrderItem,
             form=OrderItemForm,
             extra=1)
+
         if self.request.POST:
-            data['orderitems'] = OrderFormSet(self.request.POST, instance=self.object)
+            formset = OrderFormSet(self.request.POST, instance=self.object)
         else:
-            data['orderitems'] = OrderFormSet(instance=self.object)
+            formset = OrderFormSet(instance=self.object)
+            for form in formset.forms:
+                if form.instance.pk:
+                    form.initial['price'] = form.instance.product.price
 
         data['orderitems'] = formset
         return data
@@ -118,7 +125,7 @@ class OrderItemsUpdate(UpdateView):
         if self.object.get_total_cost() == 0:
             self.object.delete()
 
-        return super(OrderItemsCreate, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class OrderDelete(DeleteView):
