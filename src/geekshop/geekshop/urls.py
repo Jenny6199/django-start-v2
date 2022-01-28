@@ -30,7 +30,8 @@ urlpatterns = [
     re_path(r'^empty/', mainapp.products, name='empty'),
     re_path(r'^auth/', include('authapp.urls',  namespace='auth')),
     re_path(r'^basket/', include('basketapp.urls', namespace='basket')),
-    path('', include('social_django.urls', namespace='social')),
+    re_path(r'^', include('social_django.urls', namespace='social')),
+    re_path(r'^order/', include('ordersapp.urls', namespace='order')),
 ]
 
 if settings.DEBUG:

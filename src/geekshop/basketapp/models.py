@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from  mainapp.models import Product
+from mainapp.models import Product
 
 
 class Basket(models.Model):
@@ -30,3 +30,9 @@ class Basket(models.Model):
         _items = Basket.objects.filter(user=self.user)
         _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
         return _totalcost
+
+    @classmethod
+    def get_items(self, user):
+        """return total items for user"""
+        _items = Basket.objects.filter(user=user)
+        return _items

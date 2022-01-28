@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import json
-from django.core.mail import send_mail, backends
+#   from django.core.mail import send_mail, backends
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)miwk4_umte=b56u#^(iatm-%6z8=wd5if@n$6zkpue&y4g!gm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'authapp.apps.AuthappConfig',
     'basketapp.apps.BasketappConfig',
     'adminapp.apps.AdminappConfig',
+    'ordersapp.apps.OrdersappConfig',
 ]
 
 MIDDLEWARE = [
