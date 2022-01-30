@@ -7,5 +7,12 @@
         {{ update_form.as_p }}
         <input type="submit" class="form-control" value="сохранить">
     </form>
+    <br>
+    <button class="form-control">
+        <a href="{% url 'admin:categories' %}">
+            к списку категорий
+        </a>
+    </button>
+    <br>
 
 {% endblock content %}
