@@ -88,3 +88,9 @@ class OrderItem(models.Model):
     def get_product_cost(self):
         """Возвращает стоимость позиции в заказе"""
         return self.product.price * self.quantity
+
+    def delete(self):
+        """Переопределяет метод удаления товара"""
+        self.product.quantity += self.quantity
+        self.product.save()
+        super(self.__class__, self).delete()

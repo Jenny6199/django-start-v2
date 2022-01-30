@@ -36,3 +36,9 @@ class Basket(models.Model):
         """return total items for user"""
         _items = Basket.objects.filter(user=user)
         return _items
+
+    def delete(self):
+        """Переопределяет метод удаления товара"""
+        self.product.quantity += self.quantity
+        self.product.save()
+        super(self.__class__, self).delete()

@@ -4,7 +4,9 @@
 
 {% block content %}
 		<div class="hero-white">
-			{% include 'includes/inc-main-menu.html' %}
+			{% block main-menu %}
+				{{ block.super }}
+			{% endblock main-menu %}
 		</div>
 
 		<div class="details">
