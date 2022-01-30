@@ -71,6 +71,15 @@ class Order(models.Model):
         self.save()
 
 
+class OrderItemQuerySet(models.QuerySet):
+
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super(BasketQuerySet, self).delete(*args, **kwargs)
+
+
 class OrderItem(models.Model):
     """Модель элемента заказа товара пользователем"""
     order = models.ForeignKey(
@@ -84,6 +93,8 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(
         verbose_name='количество',
         default=0)
+
+    objects = OrderItemQuerySet.as_manager()
 
     def get_product_cost(self):
         """Возвращает стоимость позиции в заказе"""
