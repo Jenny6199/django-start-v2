@@ -6,9 +6,9 @@ from mainapp.models import Product
 class BasketQuerySet(models.QuerySet):
 
     def delete(self, *args, **kwargs):
-        for object in self:
-            object.product.quantity += object.quantity
-            object.product.save()
+        for basket_item in self:
+            basket_item.product.quantity += basket_item.quantity
+            basket_item.product.save()
         super(BasketQuerySet, self).delete(*args, **kwargs)
 
 
@@ -48,16 +48,17 @@ class Basket(models.Model):
         _items = Basket.objects.filter(user=user)
         return _items
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         """Переопределяет метод удаления товара"""
         self.product.quantity += self.quantity
         self.product.save()
-        super(self.__class__, self).delete()
+        super(self.__class__, self).delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         """Переопределяет метод сохранения товара"""
         if self.pk:
-            self.product.quantity -= self.quantity - self.__class__.get_item(self.pk).quantity
+            old_basket_item = Basket.objects.get(pk=self.pk)
+            self.product.quantity -= self.quantity - old_basket_item.quantity
         else:
             self.product.quantity -= self.quantity
         self.product.save()

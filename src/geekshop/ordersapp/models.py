@@ -74,9 +74,9 @@ class Order(models.Model):
 class OrderItemQuerySet(models.QuerySet):
 
     def delete(self, *args, **kwargs):
-        for object in self:
-            object.product.quantity += object.quantity
-            object.product.save()
+        for order_item in self:
+            order_item.product.quantity += order_item.quantity
+            order_item.product.save()
         super(BasketQuerySet, self).delete(*args, **kwargs)
 
 
@@ -105,3 +105,13 @@ class OrderItem(models.Model):
         self.product.quantity += self.quantity
         self.product.save()
         super(self.__class__, self).delete()
+
+    def save(self, *args, **kwargs):
+        """Переопределяет метод сохранения товара"""
+        if self.pk:
+            old_order_item = OrderItem.objects.get(pk=self.pk)
+            self.product.quantity -= self.quantity - old_order_item.quantity
+        else:
+            self.product.quantity -= self.quantity
+        self.product.save()
+        super(self.__class__, self).save(*args, **kwargs)
