@@ -26,7 +26,7 @@ class OrderItemsCreate(CreateView):
     def get_context_data(self, **kwargs):
         data = super(OrderItemsCreate, self).get_context_data(**kwargs)
 
-        # конструктор набора форма (возвращает класс)
+        # конструктор набора форм (возвращает класс)
         OrderFormSet = inlineformset_factory(
             Order,
             OrderItem,
@@ -48,6 +48,7 @@ class OrderItemsCreate(CreateView):
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
+                    form.initial['price'] = basket_items[num].product.price
                 basket_items.delete()
             else:
                 formset = OrderFormSet()
