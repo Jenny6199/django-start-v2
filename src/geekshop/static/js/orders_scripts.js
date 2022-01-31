@@ -1,5 +1,5 @@
 window.onload = function () {
-    var_quantity, _price, orderitem_num, delta_quantity, orderitem_quantity, delta_cost;
+    var _quantity, _price, orderitem_num, delta_quantity, orderitem_quantity, delta_cost;
     var quantity_arr = [];
     var price_arr = [];
 
@@ -16,5 +16,45 @@ window.onload = function () {
         } else {
             price_arr[i] = 0;
         }
+    }
+
+    if (!order_total_quantity) {
+        for (var i=0; i < TOTAL_FORMS; i++) {
+            order_total_quantity += quantity_arr[i];
+            order_total_cost += quantity_arr[i] * price_arr[i]
+        }
+        $('.order_total_quantity').html(order_total_quantity.toString());
+        $('.order_total_cost').html(Number(order_total_cost.toFixed(2)).toString());
+    }
+
+    $('order_form').on('click', 'input[type="number"]', function() {
+        var target = event.target;
+        orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
+        if (price_arr[orderitem_num]) {
+        orderitem_quantity = parseInt(target.value);
+        delta_quantity = orderitem_quantity - quantity_arr[orderitem_num];
+        quantity_arr[orderitem_num] = orderitem_quantity;
+        orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
+        }
+    });
+
+    $('order_form').on('click', 'input[type="checkbox"]', function(){
+        var target = event.target;
+        orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-DELETE', ''));
+        if (target.checked) {
+            delta_quantity = -quantity_arr[orderitem_num];
+        } else {
+        delta_quantity = -quantity_arr[orderitem_num];
+        }
+        orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
+    });
+
+    function orderSummaryUpdate(orderitem_price, delta_quantity) {
+        delta_cost = orderitem_price * delta_quantity;
+
+        order_total_quantity = Number((order_total_cost + delta_cost).toFixed(2));
+        order_total_quantity = order_total_quantity + delta_quantity;
+
+        $('.order_total_cost').html(order_total_quantity.toString());
     }
 }
