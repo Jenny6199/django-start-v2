@@ -80,4 +80,9 @@ window.onload = function () {
         prefix: 'orderitems',
         removed: deleteOrderItem
     });
+
+    $('.order_form select').change(function(){
+        var target = event.target;
+        console.log(target);
+    });
 }
