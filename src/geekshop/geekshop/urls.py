@@ -14,21 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 import mainapp.views as mainapp
 import basketapp.views as basketapp
+import adminapp.views as adminapp
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
-    path('', mainapp.main, name='main'),
-    path('products/', include('mainapp.urls', namespace='products')),
-    path('contact/', mainapp.contact, name='contact'),
-    path('empty/', mainapp.products, name='empty'),
-    path('auth/', include('authapp.urls', namespace='auth')),
-    path('basket/', include('basketapp.urls', namespace='basket')),
+    re_path(r'^admin/', include('adminapp.urls', namespace='admin')),
+    re_path(r'^$', mainapp.main, name='main'),
+    re_path(r'^products/', include('mainapp.urls', namespace='products')),
+    re_path(r'^contact/', mainapp.contact, name='contact'),
+    re_path(r'^empty/', mainapp.products, name='empty'),
+    re_path(r'^auth/', include('authapp.urls',  namespace='auth')),
+    re_path(r'^basket/', include('basketapp.urls', namespace='basket')),
+    re_path(r'^', include('social_django.urls', namespace='social')),
+    re_path(r'^order/', include('ordersapp.urls', namespace='order')),
 ]
 
 if settings.DEBUG:

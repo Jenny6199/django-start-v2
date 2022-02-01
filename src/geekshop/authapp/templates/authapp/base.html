@@ -1,4 +1,4 @@
-<!DOCTYPE   html>
+<!DOCTYPE html>
 {% load static %}
 <html>
     <head>
@@ -8,31 +8,38 @@
             {% block title %}
                 {{ title|title }}
             {% endblock %}
-        
         </title>
         
         {% block css %}
-            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
             <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-        
             <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
         {% endblock %}
         
         {% block js %}
-        
+				<script src="{% static 'js/bootstrap.js' %}"></script>
+				<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+                <script src ="{% static 'js/popper.min.js' %}"></script>
+				<script src="{% static 'js/basket_scripts.js' %}"></script>
         {% endblock js %}
     </head>
     <body>
-        <div class="container">
+        <div class="admin_container fullscreen">
             <div class="login">
-                <div class="h2 text-center head">
-                    Вход в систему
-                </div>
+                {% block page_name %}
+                {% endblock page_name %}
 
                 {% block content %}
 
                 {% endblock content %}
             </div>
         </div>
+        <footer class="admin_container">
+            <div class="flex_content base_back">
+                <p>Справочная информация</p>
+                <p>&#169&nbsp;2021</p>
+                <p>Карта сайта</p>
+            </div>
+        </footer>
     </body>
 </html>
