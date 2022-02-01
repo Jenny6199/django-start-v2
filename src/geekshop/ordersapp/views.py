@@ -4,10 +4,12 @@ from django.db import transaction
 from django.forms import inlineformset_factory
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from basketapp.models import Basket
+from mainapp.models import Product
 from ordersapp.models import Order, OrderItem
 from ordersapp.forms import OrderItemForm, OrderForm
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, pre_delete
+from django.http import JsonResponse
 
 
 class OrderList(ListView):
@@ -160,3 +162,12 @@ def order_forming_complete(request, pk):
 # def product_quantity_update_delete(sender, instance, **kwargs):
 #     instance.product.quantity += instance.quantity
 #     instance.product.save()
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product = Product.objects.filter(pk=int(pk)).first()
+        if product:
+            return JsonResponse({'price': product.price})
+        else:
+            return JsonResponse({'price': 0})
+        print('func get_product_price done')
