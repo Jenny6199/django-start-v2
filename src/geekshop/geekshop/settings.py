@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #   outside apps
     'social_django',
+    'debug_toolbar',
+    'template_profiler_panel',
     #   created apps
     'mainapp.apps.MainappConfig',
     'authapp.apps.AuthappConfig',
