@@ -53,7 +53,7 @@ html, body {
 	text-align: right;
 	text-transform: uppercase;
 	text-decoration: none;
-	padding: 10px 13px;
+	padding: 10px 11px;
 }
 .menu .active {
 	color: #212121;
@@ -72,15 +72,14 @@ html, body {
 }
 
 .search {
-	display: block;
-	width: 23px;
-	height: 23px;	
-	background-image: url(/static/img/search.png);
+    display: block;
+    width: 23px;
+    height: 23px;
+    background-image: url(/static/img/search.png);
     background-repeat: no-repeat;
-	position: absolute;
-	top: 63px;
-	/* left: 1176px; */
-	margin-left: 598px;
+    position: absolute;
+    top: 68px;
+    left: 1140px;
 }
 
 .basket {
@@ -90,8 +89,7 @@ html, body {
     background-image: none;
     position: absolute;
     top: 65px;
-    /* left: 1220px; */
-    margin-left: 625px;
+    left: 1173px;
 }
 
 .clearfix:after {

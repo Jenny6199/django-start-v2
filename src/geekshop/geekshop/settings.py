@@ -27,10 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)miwk4_umte=b56u#^(iatm-%6z8=wd5if@n$6zkpue&y4g!gm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get("COMBAT_SERVER"):
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -52,6 +54,10 @@ INSTALLED_APPS = [
     'basketapp.apps.BasketappConfig',
     'adminapp.apps.AdminappConfig',
     'ordersapp.apps.OrdersappConfig',
+]
+
+INSTALLED_IPS = [
+    '127.0.0.1',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +106,7 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 if not DEBUG:
-    # for strike - PostgreSQL
+    # if DEBUG=False - PostgreSQL for COMBAT_SERVER
     DATABASES = {
         'default': {
             'NAME': 'geekshop',
@@ -109,7 +115,7 @@ if not DEBUG:
         }
     }
 else:
-    # for local - SQLite3:
+    # if DEBUG=True - SQLite3 for DEVELOPMENT:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -154,7 +160,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
@@ -176,18 +182,18 @@ LOGIN_URL = '/auth/login/'
 DOMAIN_NAME = 'http://localhost:8000'
 
 # 1. Вариант отправки сообщений на реальный сервер.
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = '25'
-# EMAIL_HOST_USER = 'django@geekshop.local'
-# EMAIL_HOST_PASSWORD = 'geekshop'
-# EMAIL_USE_SSL = False
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'django@geekshop.local'
+EMAIL_HOST_PASSWORD = 'geekshop'
+EMAIL_USE_SSL = False
 
 #   2. Вариант python -m smtpd -n -c DebuggingServer localhost:25
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
-#   Вариант логирования сообщений почты в виде файлов вместо отправки
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'tmp/email-messages/'
+#   3. Вариант логирования сообщений почты в виде файлов вместо отправки
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
