@@ -27,10 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)miwk4_umte=b56u#^(iatm-%6z8=wd5if@n$6zkpue&y4g!gm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get("COMBAT_SERVER"):
-    DEBUG = False
-else:
-    DEBUG = True
+
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -105,8 +103,8 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if not DEBUG:
-    # if DEBUG=False - PostgreSQL for COMBAT_SERVER
+if os.environ.get("COMBAT_SERVER"):
+    # PostgreSQL for COMBAT_SERVER
     DATABASES = {
         'default': {
             'NAME': 'geekshop',
@@ -115,7 +113,7 @@ if not DEBUG:
         }
     }
 else:
-    # if DEBUG=True - SQLite3 for DEVELOPMENT:
+    # SQLite3 for DEVELOPMENT:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
