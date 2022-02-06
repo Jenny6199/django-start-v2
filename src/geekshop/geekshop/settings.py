@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'social_django',
     'debug_toolbar',
     'template_profiler_panel',
+    'django-extensions',
     #   created apps
     'mainapp.apps.MainappConfig',
     'authapp.apps.AuthappConfig',
