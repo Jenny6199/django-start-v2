@@ -6,19 +6,23 @@ import random
 
 
 def get_hot_product():
-    products_all = Product.objects.all()
+    products_all = Product.objects.all().select_related('product')
     return random.sample(list(products_all), 1)[0]
 
 
 def get_same_products(hot_product):
-    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+    same_products = Product.objects.filter(
+        category=hot_product.category).exclude(
+        pk=hot_product.pk).select_relatad('category')[:3]
     return same_products
 
 
 def main(request):
     title = 'главная'
 
-    products_all = Product.objects.all()[:4]
+    products_all = Product.objects.filter(
+        is_active=True,
+        category__is_active=True).select_related('category')[:3]
 
     content = {
         'title': title,
@@ -29,7 +33,7 @@ def main(request):
 
 def products(request, pk=None, page=1):
     title = 'продукты'
-    links_menu = ProductCategory.objects.filter(is_active=True)
+    links_menu = ProductCategory.objects.filter(is_active=True).select_related('id')
     our_products = Product.objects.all()
 
     if pk is not None:
