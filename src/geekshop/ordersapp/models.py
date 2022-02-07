@@ -36,7 +36,9 @@ class Order(models.Model):
         default=FORMING)
     is_active = models.BooleanField(
         verbose_name='активен',
-        default=True)
+        default=True,
+        db_index=True,
+    )
 
     class Meta:
         ordering = ('-created',)
