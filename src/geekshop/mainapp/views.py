@@ -96,7 +96,7 @@ def product(request, pk):
 
     content = {
         'title': title,
-        'links_menu': ProductCategory.objects.all().select_related('category'),
+        'links_menu': ProductCategory.objects.all().select_related(),
         'product': get_object_or_404(Product, pk=pk),
     }
 
