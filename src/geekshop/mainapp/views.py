@@ -36,7 +36,7 @@ def main(request):
 def products(request, pk=None, page=1):
     title = 'продукты'
     links_menu = ProductCategory.objects.filter(is_active=True)
-    our_products = Product.objects.all().select_related('category')
+    our_products = Product.objects.all()
 
     if pk is not None:
         if pk == 0:
@@ -47,14 +47,14 @@ def products(request, pk=None, page=1):
             our_products = Product.objects.filter(
                 is_active=True,
                 category__is_active=True,
-            ).select_relaged('product').order_by('price')
+            ).order_by('price')
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
             our_products = Product.objects.filter(
                 category__pk=pk,
                 is_active=True,
                 category__is_active=True,
-            ).select_related('product').order_by('price')
+            ).order_by('price')
 
         paginator = Paginator(our_products, 2)
         try:
