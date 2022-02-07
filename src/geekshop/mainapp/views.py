@@ -101,3 +101,8 @@ def product(request, pk):
     }
 
     return render(request, 'mainapp/product.html', content)
+
+
+def load_from_json(file_name):
+    with open(os.path.join(JSON_PATH, file_name +'.json'), 'r', errors='ignore') as infile:
+        return json.load(infile)

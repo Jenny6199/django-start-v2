@@ -1,0 +1,2 @@
+http://31.31.201.195:80/auth/login/ POST username=django&password=geekbrains
+http://31.31.201.195:80/order/read/1

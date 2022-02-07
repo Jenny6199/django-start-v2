@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
@@ -104,6 +105,7 @@ def verify(request, email, activation_key):
         return HttpResponseRedirect(reverse('main'))
 
 
+@login_required
 @transaction.atomic
 def edit(request):
     """Редактирование профиля пользователя"""
