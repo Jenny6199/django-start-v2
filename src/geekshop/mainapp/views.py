@@ -6,19 +6,25 @@ import random
 
 
 def get_hot_product():
-    products_all = Product.objects.all()
+    products_all = Product.objects.all().select_related('category')
     return random.sample(list(products_all), 1)[0]
 
 
 def get_same_products(hot_product):
-    same_products = Product.objects.filter(category=hot_product.category).exclude(pk=hot_product.pk)[:3]
+    same_products = Product.objects.filter(
+        category=hot_product.category
+    ).select_related(
+        'category'
+    ).exclude(pk=hot_product.pk)[:3]
     return same_products
 
 
 def main(request):
     title = 'главная'
 
-    products_all = Product.objects.all()[:4]
+    products_all = Product.objects.filter(
+        is_active=True,
+        category__is_active=True).select_related('category')[:3]
 
     content = {
         'title': title,
@@ -90,8 +96,13 @@ def product(request, pk):
 
     content = {
         'title': title,
-        'links_menu': ProductCategory.objects.all(),
+        'links_menu': ProductCategory.objects.all().select_related(),
         'product': get_object_or_404(Product, pk=pk),
     }
 
     return render(request, 'mainapp/product.html', content)
+
+
+def load_from_json(file_name):
+    with open(os.path.join(JSON_PATH, file_name +'.json'), 'r', errors='ignore') as infile:
+        return json.load(infile)

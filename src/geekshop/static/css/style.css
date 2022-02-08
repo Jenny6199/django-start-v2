@@ -53,7 +53,7 @@ html, body {
 	text-align: right;
 	text-transform: uppercase;
 	text-decoration: none;
-	padding: 10px 13px;
+	padding: 10px 11px;
 }
 .menu .active {
 	color: #212121;
@@ -72,15 +72,14 @@ html, body {
 }
 
 .search {
-	display: block;
-	width: 23px;
-	height: 23px;	
-	background-image: url(/static/img/search.png);
+    display: block;
+    width: 23px;
+    height: 23px;
+    background-image: url(/static/img/search.png);
     background-repeat: no-repeat;
-	position: absolute;
-	top: 63px;
-	/* left: 1176px; */
-	margin-left: 598px;
+    position: absolute;
+    top: 68px;
+    left: 1140px;
 }
 
 .basket {
@@ -90,8 +89,7 @@ html, body {
     background-image: none;
     position: absolute;
     top: 65px;
-    /* left: 1220px; */
-    margin-left: 625px;
+    left: 1173px;
 }
 
 .clearfix:after {
@@ -547,7 +545,7 @@ html, body {
 
 .footer {
 	height: 384px;
-	width: 1169px;
+	width: 1336px;
 	background-color: #f7f7f7;
 	padding-left: 99px;
 	padding-right: 98px;
@@ -568,9 +566,9 @@ html, body {
     color: #6c6c6c;
 }
 .text-footer {
-    margin-top: 120px;
+    margin: 120px 0px 0px 75px;
     float: left;
-    padding: 20px;
+    padding: 0px;
 }
 .text-footer:last-child {
 	margin-right: 0;
@@ -1136,9 +1134,17 @@ td:first-child {
 }
 
 .fullscreen{
-    min-height: 89vh;
+    min-height: 100vh;
 }
 
 .base_footer{
     min-height: 10vh;
+}
+
+.head_space{
+    margin-top: 10vh;
+}
+
+.orders_list{
+    margin-top: 5vh;
 }

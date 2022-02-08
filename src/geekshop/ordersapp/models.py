@@ -36,7 +36,9 @@ class Order(models.Model):
         default=FORMING)
     is_active = models.BooleanField(
         verbose_name='активен',
-        default=True)
+        default=True,
+        db_index=True,
+    )
 
     class Meta:
         ordering = ('-created',)
@@ -48,17 +50,17 @@ class Order(models.Model):
 
     def get_total_quantity(self):
         """Возвращает общее количество позиций в заказе"""
-        items = self.orderitems.select_related()
+        items = self.orderitems.select_related('order')
         return sum(list(map(lambda x: x.quantity, items)))
 
     def get_product_type_quantity(self):
         """Возвращает количество позиций в заказе по категориям"""
-        items = self.orderitems.select_related()
+        items = self.orderitems.select_related('product')
         return len(items)
 
     def get_total_cost(self):
         """Возвращает общую стоимость заказа"""
-        items = self.orderitems.select_related()
+        items = self.orderitems.select_related('product')
         return sum(list(map(lambda x: x.quantity * x.product.price, items)))
 
     # переопределяем метод, удаляющий объект

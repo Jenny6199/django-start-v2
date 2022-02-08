@@ -10,6 +10,8 @@ from ordersapp.forms import OrderItemForm, OrderForm
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, pre_delete
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 class OrderList(ListView):
@@ -18,6 +20,10 @@ class OrderList(ListView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
+
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(ListView, self).dispatch(*args, **kwargs)
 
 
 class OrderItemsCreate(CreateView):
@@ -76,6 +82,10 @@ class OrderItemsCreate(CreateView):
 
         return super(OrderItemsCreate, self).form_valid(form)
 
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(CreateView, self).dispatch(*args, **kwargs)
+
 
 class OrderRead(DetailView):
     """Контроллер для чтения заказа"""
@@ -88,6 +98,10 @@ class OrderRead(DetailView):
         context = super(OrderRead, self).get_context_data(**kwargs)
         context['title'] = 'заказ/просмотр'
         return context
+
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(DetailView, self).dispatch(*args, **kwargs)
 
 
 class OrderItemsUpdate(UpdateView):
@@ -108,7 +122,8 @@ class OrderItemsUpdate(UpdateView):
         if self.request.POST:
             formset = OrderFormSet(self.request.POST, instance=self.object)
         else:
-            formset = OrderFormSet(instance=self.object)
+            queryset = self.object.orderitems.select_related()
+            formset = OrderFormSet(instance=self.object, queryset=queryset)
             for form in formset.forms:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
@@ -131,6 +146,10 @@ class OrderItemsUpdate(UpdateView):
             self.object.delete()
 
         return super().form_valid(form)
+
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(UpdateView, self).dispatch(*args, **kwargs)
 
 
 class OrderDelete(DeleteView):
@@ -165,9 +184,8 @@ def order_forming_complete(request, pk):
 
 def get_product_price(request, pk):
     if request.is_ajax():
-        product = Product.objects.filter(pk=int(pk)).first()
+        product = Product.objects.filter(pk=int(pk)).select_related('category').first()
         if product:
             return JsonResponse({'price': product.price})
         else:
             return JsonResponse({'price': 0})
-        print('func get_product_price done')

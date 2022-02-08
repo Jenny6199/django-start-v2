@@ -19,12 +19,14 @@ Deprecated==1.2.13
 distlib==0.3.4
 Django==3.2.10
 django-debug-toolbar==3.2.4
+django-debug-toolbar-template-profiler==2.0.2
 django-extensions==3.1.5
 django-filter==21.1
 djangorestframework==3.13.1
 drf-yasg==1.20.0
 filelock==3.4.0
 flake8==4.0.1
+graphviz==0.19.1
 gunicorn==20.1.0
 idna==3.3
 importlib-metadata==4.2.0
@@ -43,6 +45,7 @@ prompt-toolkit==3.0.24
 psycopg2-binary==2.9.2
 pycodestyle==2.8.0
 pycparser==2.21
+pydotplus==2.0.2
 pyflakes==2.4.0
 PyJWT==2.3.0
 pyparsing==3.0.6
@@ -58,7 +61,7 @@ six==1.16.0
 social-auth-app-django==5.0.0
 social-auth-core==4.2.0
 sqlparse==0.4.2
-typing-extensions==4.0.1
+typing_extensions==4.0.1
 uritemplate==4.1.1
 urllib3==1.26.7
 vine==5.0.0
