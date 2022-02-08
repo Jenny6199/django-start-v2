@@ -9,6 +9,7 @@
            {% csrf_token %}
            <input class="btn btn-danger" type="submit" value="удалить">
        </form>
+       </br>
        <button class="btn btn-success">
            <a href="{% url 'ordersapp:orders_list' %}">отмена</a>
        </button>

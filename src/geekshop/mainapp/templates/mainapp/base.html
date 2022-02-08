@@ -10,34 +10,32 @@
 				{% endblock title%}
 			</title>
 			{% block css %}
-				<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+				<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 				<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 				<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
 			{% endblock css %}
 
 			{% block js %}
-				<script src="{% static 'js/popper.min.js' %}"></script>
 				<script src="{% static 'js/bootstrap.js' %}"></script>
+				<script src="{% static 'js/popper.min.js' %}"></script>
 				<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 				<script src="{% static 'js/basket_scripts.js' %}"></script>
 			{% endblock js %}
 	</head>
-
-
     <body>
-        <div class="admin_container">
-            {% block content %}
-
-                    {% block main-menu %}
-                        {% include 'includes/inc-main-menu.html' %}
-                    {% endblock main-menu %}
-
-            {% endblock content %}
-        </div>
-
-        {% block footer %}
-            {% include 'includes/inc-footer.html' %}
-        {% endblock footer %}
-
+			<div class="wrapper fullscreen">
+				<div class="admin_container">
+            		{% block content %}
+                    	{% block main-menu %}
+                        	{% include 'includes/inc-main-menu.html' %}
+                    	{% endblock main-menu %}
+            		{% endblock content %}
+        		</div>
+			</div>
+			<div class="admin_container">
+				{% block footer %}
+            		{% include 'includes/inc-footer.html' %}
+        		{% endblock footer %}
+			</div>
     </body>
 </html>
