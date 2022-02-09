@@ -6,37 +6,24 @@
           <li><a href="{% url 'products:index' %}">продукты</a></li>
           <li><a href="{% url 'contact' %}">контакты</a></li>
           {% if  user.is_authenticated %}
-<!--              <li>-->
-<!--                  <a class="dropdown-toggle" href="#" data-toggle="dropdown">-->
-<!--                      {{ user.first_name|default:'Пользователь' }}-->
-<!--                      <span class="caret"></span>-->
-<!--                  </a>-->
-<!--                  <ul class="dropdown-menu">-->
-<!--                      <li>-->
-<!--                          <a href="{% url 'auth:edit' %}">-->
-<!--                              профиль-->
-<!--                          </a>-->
-<!--                      </li>-->
-<!--                      <li>-->
-<!--                          <a href="{% url 'ordersapp:orders_list' %}">-->
-<!--                              заказы-->
-<!--                          </a>-->
-<!--                      </li>-->
-<!--                  </ul>-->
-<!--              </li>-->
-          <!-- Попытка продублировать неудачна, но ссылка на заказы все равно нужна -->
-          <li>
-              <div class="dropdown">
-                  <a href="{% url 'ordersapp:orders_list' %}" class="dropdown-toggle" data-toggle="dropdown">
-                      заказы
+              <li class="dropdown">
+                  <a class="dropdown-toggle" href="#" role="link" id="user_dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ user.first_name|default:'Пользователь' }}
+                      <span class="caret"></span>
                   </a>
-                  <span class="caret"></span>
-                  <ul class="dropdown-menu">
-                      <li>1</li>
-                      <li>2</li>
+                  <ul class="dropdown-menu" aria-labelledby="user_dropdownMenu">
+                      <li>
+                          <a class="dropdown-item" href="{% url 'auth:edit' %}">
+                              профиль
+                          </a>
+                      </li>
+                      <li>
+                          <a class="dropdown-item" href="{% url 'ordersapp:orders_list' %}">
+                              заказы
+                          </a>
+                      </li>
                   </ul>
-              </div>
-          </li>
+              </li>
           {% endif %}
           {% if user.is_superuser %}
               <li>
