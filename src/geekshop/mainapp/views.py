@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from mainapp.models import ProductCategory, Product
 import random
+from django.conf import settings
+from django.core.cache import cache
 
 
 def get_hot_product():
@@ -106,3 +108,15 @@ def product(request, pk):
 def load_from_json(file_name):
     with open(os.path.join(JSON_PATH, file_name +'.json'), 'r', errors='ignore') as infile:
         return json.load(infile)
+
+
+def get_links_menu():
+    if settings.LOW_CACHE:
+        key = 'links_menu'
+        links_menu = cache.get(key)
+        if links_menu is None:
+            links_menu = ProductCategory.objects.filter(is_active=True)
+            cache.set(key, links_menu)
+        return links_menu
+    else:
+        return ProductCategory.objects.filter(is_active=True)
