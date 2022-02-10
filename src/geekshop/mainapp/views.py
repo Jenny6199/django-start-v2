@@ -158,9 +158,9 @@ def get_product():
         return get_object_or_404(Product, pk=pk)
 
 
-def get_products_ordered_by_price():
+def get_products_orderd_by_price():
     if settings.LOW_CACHE:
-        key = 'products_ordered_by_price'
+        key = 'products_orderd_by_price'
         products = cache.get(key)
         if products is None:
             products = Product.objects.filter(is_active=True, category__is_active=True).order_by('price')
