@@ -132,3 +132,16 @@ def get_category(pk):
         return category
     else:
         return get_object_or_404(ProductCategory, pk=pk)
+
+
+def get_products():
+    if settings.LOW_CACHE:
+        key = 'products'
+        products = cache.get(key)
+        if products is None:
+            products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')
+            cache.set(key, products)
+        return products
+    else:
+        return Product.objects.filter(is_active=True, category__is_active=True).select_related('category')
+
