@@ -1148,3 +1148,8 @@ td:first-child {
 .orders_list{
     margin-top: 5vh;
 }
+
+.btn a {
+    text-decoration: none;
+    color: black;
+}

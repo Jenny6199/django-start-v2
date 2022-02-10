@@ -45,7 +45,7 @@ class Basket(models.Model):
     @classmethod
     def get_items(self, user):
         """return total items for user"""
-        _items = Basket.objects.filter(user=user).select_related('user')
+        _items = Basket.objects.filter(user=user).select_related()
         return _items
 
     def delete(self, *args, **kwargs):
