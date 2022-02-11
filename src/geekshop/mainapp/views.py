@@ -1,15 +1,18 @@
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from mainapp.models import ProductCategory, Product
+import json
+import os
 import random
+
 from django.conf import settings
 from django.core.cache import cache
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+from mainapp.models import ProductCategory, Product
 
 
 def get_hot_product():
-    products_all = Product.objects.all().select_related('category')
-    return random.sample(list(products_all), 1)[0]
+    products = get_products()
+    return random.sample(list(products), 1)[0]
 
 
 def get_same_products(hot_product):
@@ -23,22 +26,19 @@ def get_same_products(hot_product):
 
 def main(request):
     title = 'главная'
-
-    products_all = Product.objects.filter(
-        is_active=True,
-        category__is_active=True).select_related('category')[:3]
+    products = get_products()[:3]
 
     content = {
         'title': title,
-        'products': products_all,
+        'products': products,
     }
     return render(request, 'mainapp/index.html', content)
 
 
 def products(request, pk=None, page=1):
     title = 'продукты'
-    links_menu = ProductCategory.objects.filter(is_active=True)
-    our_products = Product.objects.all()
+    links_menu = get_links_menu()
+    products = Product.objects.all()
 
     if pk is not None:
         if pk == 0:
@@ -46,19 +46,12 @@ def products(request, pk=None, page=1):
                 'pk': 0,
                 'name': 'все',
             }
-            our_products = Product.objects.filter(
-                is_active=True,
-                category__is_active=True,
-            ).select_related().order_by('price')
+            products = get_products_orderd_by_price()
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            our_products = Product.objects.filter(
-                category__pk=pk,
-                is_active=True,
-                category__is_active=True,
-            ).select_related().order_by('price')
+            products = get_products_in_category_orderd_by_price()
 
-        paginator = Paginator(our_products, 2)
+        paginator = Paginator(products, 2)
         try:
             products_paginator = paginator.page(page)
         except PageNotAnInteger:
@@ -83,32 +76,55 @@ def products(request, pk=None, page=1):
         'links_menu': links_menu,
         'hot_products': hot_product,
         'same_products': same_products,
-        'products': our_products,
+        'products': products,
     }
 
     return render(request, 'mainapp/products.html', content)
 
 
 def contact(request):
-    return render(request, 'mainapp/contact.html')
+    """ Контроллер страницы контакты """
+    title = 'о нас'
+
+    if settings.LOW_CACHE:
+        key = f'locations'
+        locations = cache.get(key)
+        if locations is None:
+            locations = load_from_json('locations')
+            cache.set(key, locations)
+    else:
+        locations = load_from_json('locations')
+
+    context = {
+        'locations': locations,
+        'title': title,
+        }
+
+    return render(request, 'mainapp/contact.html', context)
 
 
 def product(request, pk):
     title = 'продукты'
+    links_menu = get_links_menu()
+    product = get_product(pk)
 
     content = {
         'title': title,
-        'links_menu': ProductCategory.objects.all().select_related(),
-        'product': get_object_or_404(Product, pk=pk),
+        'links_menu': links_menu,
+        'product': product
     }
 
     return render(request, 'mainapp/product.html', content)
 
 
 def load_from_json(file_name):
-    with open(os.path.join(JSON_PATH, file_name +'.json'), 'r', errors='ignore') as infile:
+    """ Загрузка файлов из каталога json"""
+    # передать JSON_PATH
+    with open(os.path.join('mainapp/json', file_name +'.json'), 'r', errors='ignore') as infile:
         return json.load(infile)
 
+
+# Next definition used for cached aims.
 
 def get_links_menu():
     if settings.LOW_CACHE:
