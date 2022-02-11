@@ -46,7 +46,7 @@ def products(request, pk=None, page=1):
     products = Product.objects.all()
 
     if pk is not None:
-        if pk == '0':
+        if pk == 0:
             category = {
                 'pk': 0,
                 'name': 'все',
@@ -72,6 +72,18 @@ def products(request, pk=None, page=1):
         }
 
         return render(request, 'mainapp/products_list.html', content)
+    hot_product = get_hot_product()
+    same_products = get_same_products(hot_product)
+
+    content = {
+        'title': title,
+        'links_menu': links_menu,
+        'hot_products': hot_product,
+        'same_products': same_products,
+        'products': products,
+    }
+
+    return render(request, 'mainapp/products.html', content)
 
 
 def products_ajax(request, pk=None, page=1):
@@ -110,21 +122,6 @@ def products_ajax(request, pk=None, page=1):
                 request=request)
 
         return JsonResponse({'result': result})
-
-
-
-    hot_product = get_hot_product()
-    same_products = get_same_products(hot_product)
-
-    content = {
-        'title': title,
-        'links_menu': links_menu,
-        'hot_products': hot_product,
-        'same_products': same_products,
-        'products': products,
-    }
-
-    return render(request, 'mainapp/products.html', content)
 
 
 def contact(request):
