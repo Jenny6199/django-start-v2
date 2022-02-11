@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
+from django.views.decorators.cache import cache_page
 
 
 def get_hot_product():
@@ -35,6 +36,7 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
+@cache_page(240)
 def products(request, pk=None, page=1):
     title = 'продукты'
     links_menu = get_links_menu()
@@ -106,7 +108,7 @@ def contact(request):
 def product(request, pk):
     title = 'продукты'
     links_menu = get_links_menu()
-    product = get_product(pk)
+    product = get_product(pk=pk)
 
     content = {
         'title': title,

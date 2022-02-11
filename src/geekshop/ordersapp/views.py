@@ -187,6 +187,7 @@ def order_forming_complete(request, pk):
 #     instance.product.quantity += instance.quantity
 #     instance.product.save()
 
+
 def get_product_price(request, pk):
     if request.is_ajax():
         product = Product.objects.filter(pk=int(pk)).select_related('category').first()
