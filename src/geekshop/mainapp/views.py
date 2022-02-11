@@ -8,7 +8,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
+from django.template.loader import render_to_string
 from django.views.decorators.cache import cache_page
+from django.http import JsonResponse
+
 
 
 def get_hot_product():
@@ -43,7 +46,7 @@ def products(request, pk=None, page=1):
     products = Product.objects.all()
 
     if pk is not None:
-        if pk == 0:
+        if pk == '0':
             category = {
                 'pk': 0,
                 'name': 'все',
@@ -69,6 +72,46 @@ def products(request, pk=None, page=1):
         }
 
         return render(request, 'mainapp/products_list.html', content)
+
+
+def products_ajax(request, pk=None, page=1):
+    title = 'продукты'
+    if request.is_ajax():
+        links_menu = get_links_menu()
+
+        if pk:
+            if pk == '0':
+                category = {
+                    'pk': 0,
+                    'name': 'все',
+                }
+                products = get_products_orderd_by_price()
+            else:
+                category = get_category(pk)
+                products = get_products_in_category_orderd_by_price(pk)
+
+            paginator = Paginator(products, 2)
+            try:
+                products_paginator = paginator.page(page)
+            except PageNotAnInteger:
+                products_paginator = paginator.page(1)
+            except EmptyPage:
+                products_paginator = paginator.page(paginator.num_pages)
+
+            content = {
+                'links_menu': links_menu,
+                'category': category,
+                'products': products_paginator,
+            }
+
+            result = render_to_string(
+                'mainapp/includes/inc_products_list_content.html',
+                context=content,
+                request=request)
+
+        return JsonResponse({'result': result})
+
+
 
     hot_product = get_hot_product()
     same_products = get_same_products(hot_product)
