@@ -49,7 +49,7 @@ def products(request, pk=None, page=1):
             products = get_products_orderd_by_price()
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = get_products_in_category_orderd_by_price()
+            products = get_products_in_category_orderd_by_price(pk)
 
         paginator = Paginator(products, 2)
         try:
