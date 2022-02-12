@@ -13,7 +13,6 @@ from django.views.decorators.cache import cache_page
 from django.http import JsonResponse
 
 
-
 def get_hot_product():
     products = get_products()
     return random.sample(list(products), 1)[0]
