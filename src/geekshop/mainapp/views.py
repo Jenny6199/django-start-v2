@@ -39,7 +39,6 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
-@cache_page(240)
 def products(request, pk=None, page=1):
     title = 'продукты'
     links_menu = get_links_menu()
