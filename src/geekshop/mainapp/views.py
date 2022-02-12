@@ -52,7 +52,8 @@ def products(request, pk=None, page=1):
             }
             products = get_products_orderd_by_price()
         else:
-            category = get_object_or_404(ProductCategory, pk=pk)
+            # category = get_object_or_404(ProductCategory, pk=pk)
+            category = get_category(pk=pk)
             products = get_products_in_category_orderd_by_price(pk)
 
         paginator = Paginator(products, 2)
@@ -71,6 +72,7 @@ def products(request, pk=None, page=1):
         }
 
         return render(request, 'mainapp/products_list.html', content)
+
     hot_product = get_hot_product()
     same_products = get_same_products(hot_product)
 
