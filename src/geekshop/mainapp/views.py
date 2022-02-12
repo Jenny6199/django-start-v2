@@ -38,6 +38,7 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
+@cache_page(3600)
 def products(request, pk=None, page=1):
     title = 'продукты'
     links_menu = get_links_menu()
@@ -86,7 +87,6 @@ def products(request, pk=None, page=1):
 
 
 def products_ajax(request, pk=None, page=1):
-    title = 'продукты'
     if request.is_ajax():
         links_menu = get_links_menu()
 
@@ -116,7 +116,7 @@ def products_ajax(request, pk=None, page=1):
             }
 
             result = render_to_string(
-                'mainapp/includes/inc_products_list_content.html',
+                'includes/inc_products_list_content.html',
                 context=content,
                 request=request)
 

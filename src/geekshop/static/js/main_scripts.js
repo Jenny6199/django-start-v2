@@ -4,7 +4,7 @@ $ ( document ).on( 'click', '.details a', function(event) {
         var link_array = link.split('/');
         if (link_array[4] == 'category') {
             $.ajax({
-                url: link;
+                url: link,
                 success: function (data) {
                     $('.details').html(data.result);
                 },
