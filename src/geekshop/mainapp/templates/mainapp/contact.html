@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block content %}
+		{% block main-menu %}
+			{{ block.super }}
+		{% endblock main-menu %}
 		<div class="hero">
-			{% block main-menu %}
-				{{ block.super }}
-			{% endblock main-menu %}
 			<h1>наши контакты</h1>
 		</div>
 
