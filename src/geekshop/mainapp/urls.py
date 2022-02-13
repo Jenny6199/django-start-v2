@@ -14,7 +14,7 @@ urlpatterns = [
     # This urlpatterns is used def re_path
     re_path(r'^$', mainapp.products, name='index'),
     re_path(r'^product/(?P<pk>\d+)/$', mainapp.product, name='product'),
-    re_path(r'^category/(?P<pk>\d+)/$', mainapp.products, name='category'),
+    re_path(r'^category/(?P<pk>\d+)/$', cache_page(3600)(mainapp.products), name='category'),
     re_path(r'^category/(?P<pk>\d+)/page/(?P<page>\d+)/$', mainapp.products, name='page'),
     # This block for use cache with ajax
     re_path(r'^category/(?P<pk>\d)/ajax/$', cache_page(3600)(mainapp.products_ajax)),
