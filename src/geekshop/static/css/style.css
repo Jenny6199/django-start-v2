@@ -1135,7 +1135,7 @@ td:first-child {
 }
 
 .fullscreen{
-    min-height: 100vh;
+    min-height: 89vh;
 }
 
 .base_footer{
@@ -1144,6 +1144,10 @@ td:first-child {
 
 .head_space{
     margin-top: 10vh;
+}
+
+.head_space_15{
+    margin-top: 15vh;
 }
 
 .orders_list{

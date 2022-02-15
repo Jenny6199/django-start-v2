@@ -96,6 +96,13 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'adminapp/product_read.html'
 
+    def get_queryset(self):
+        return Product.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'cведения о продукте'
+        return context
 
 # Контроллеры пользователей
 
@@ -258,8 +265,11 @@ def category_delete(request, pk):
 
 @user_passes_test(lambda u: u.is_superuser)
 def products(request, pk):
+    """
+    Контроллер страницы просмотра детальной
+    информации о продукте
+    """
     title = 'админка/продукт'
-
     category = get_object_or_404(ProductCategory, pk=pk)
     products_list = Product.objects.filter(category__pk=pk).order_by('name')
 
