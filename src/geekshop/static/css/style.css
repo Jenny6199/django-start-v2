@@ -31,16 +31,16 @@ html, body {
 }
 
 .logo {
-	background-image: url(/static/img/logo.png);
-	margin-top: 63px;
-	width: 185px;
-	height: 22px;
-	float: left;
+background-image: url(/static/img/logo.png);
+margin: 50px 0 20px 0;
+width: 185px;
+height: 22px;
+float: left;
 }
 
 .menu {
     list-style-type: none;
-    margin: 65px 0 0 274px;
+    margin: 50px 0 0 274px;
     float: inline-start;
     position: absolute;
 }
