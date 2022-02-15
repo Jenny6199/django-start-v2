@@ -92,7 +92,10 @@ class ProductCategoryDeleteView(DeleteView):
 # Классы представления продукта
 
 class ProductDetailView(DetailView):
-    """Класс представлений просмотр информации о продукте"""
+    """
+    Класс представления страницы
+    просмотра информации о продукте
+    """
     model = Product
     template_name = 'adminapp/product_read.html'
 

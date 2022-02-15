@@ -93,7 +93,10 @@ class OrderItemsCreate(CreateView):
 
 
 class OrderRead(DetailView):
-    """Контроллер для чтения заказа"""
+    """
+    Класс представления
+    страницы просмотра деталей заказа
+    """
     model = Order
 
     def get_queryset(self):
