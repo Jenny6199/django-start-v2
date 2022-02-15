@@ -12,6 +12,7 @@ from django.db.models.signals import pre_save, pre_delete
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 
 class OrderList(ListView):
@@ -113,7 +114,10 @@ class OrderRead(DetailView):
 
 
 class OrderItemsUpdate(UpdateView):
-    """Контроллер для обновления заказа"""
+    """
+    Класс представлений страницы редактирования
+    заказа пользователя
+    """
     model = Order
     fields = []
     success_url = reverse_lazy('ordersapp:orders_list')
@@ -137,6 +141,7 @@ class OrderItemsUpdate(UpdateView):
                     form.initial['price'] = form.instance.product.price
 
         data['orderitems'] = formset
+        data['title'] = 'редактирование заказа'
         return data
 
     def form_valid(self, form):
@@ -165,6 +170,14 @@ class OrderDelete(DeleteView):
     model = Order
     success_url = reverse_lazy('ordersapp:orders_list')
 
+    def get_queryset(self):
+        return Order.objects.all()
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['title'] = 'удаление заказа'
+        return data
+
 
 def order_forming_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
@@ -181,6 +194,7 @@ def product_quantity_update_save(sender, update_fields, instance, **kwargs):
             instance.product.quantity -= instance.quantity - sender.objects.get(pk=instance.pk).quantity
         else:
             instance.product.quantity -= instance.quantity
+            # instance.product.quantity = F('quantity') - 1
         instance.product.save()
 
 
@@ -188,6 +202,7 @@ def product_quantity_update_save(sender, update_fields, instance, **kwargs):
 @receiver(pre_delete, sender=Basket)
 def product_quantity_update_delete(sender, instance, **kwargs):
     instance.product.quantity += instance.quantity
+    # instance.product.quantity = F('quantity') + 1
     instance.product.save()
 
 

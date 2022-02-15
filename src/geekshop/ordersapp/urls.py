@@ -1,7 +1,7 @@
-from django.urls import path, re_path
+from django.urls import re_path
 import ordersapp.views as ordersapp
 
-app_name="ordersapp"
+app_name = "ordersapp"
 
 urlpatterns = [
     re_path(r'^$', ordersapp.OrderList.as_view(), name='orders_list'),
