@@ -9,9 +9,15 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.utils.decorators import method_decorator
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.db import connections
+
+# Классы представления пользователей
 
 
 class UsersListView(ListView):
+    """Класс представлений список пользователелей"""
     model = ShopUser
     template_name = 'adminapp/users.html'
 
@@ -29,10 +35,12 @@ class UsersListView(ListView):
 
 
 class UserCreateView(CreateView):
+    """Класс представлений создания пользователя"""
     pass
 
 
 class UserUpdateView(UpdateView):
+    """Класс представлений редактирование пользователя"""
     model = ShopUser
     template_name = 'adminapp/user_update.html'
     success_url = reverse_lazy('admin:user_update')
@@ -44,7 +52,10 @@ class UserUpdateView(UpdateView):
         return context
 
 
+# Классы представления категорий
+
 class ProductCategoryCreateView(CreateView):
+    """Класс представлений создание категории продукта"""
     model = ProductCategory
     template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('admin:categories')
@@ -52,6 +63,7 @@ class ProductCategoryCreateView(CreateView):
 
 
 class ProductCategoryUpdateView(UpdateView):
+    """Класс представлений редактирование категории продукта"""
     model = ProductCategory
     template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('admin:categories')
@@ -64,6 +76,7 @@ class ProductCategoryUpdateView(UpdateView):
 
 
 class ProductCategoryDeleteView(DeleteView):
+    """Класс представлений удаление категории продукта"""
     model = ProductCategory
     template_name = 'adminapp/category_delete.html'
     success_url = reverse_lazy('admin:categories_delete')
@@ -76,10 +89,15 @@ class ProductCategoryDeleteView(DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
 
+# Классы представления продукта
+
 class ProductDetailView(DetailView):
+    """Класс представлений просмотр информации о продукте"""
     model = Product
     template_name = 'adminapp/product_read.html'
 
+
+# Контроллеры пользователей
 
 @user_passes_test(lambda u: u.is_superuser)
 def users(request):
@@ -158,6 +176,8 @@ def user_delete(request, pk):
     return render(request, 'adminapp/user_delete.html', content)
 
 
+# Контроллеры категорий
+
 @user_passes_test(lambda u: u.is_superuser)
 def categories(request):
     title = 'админка/категории'
@@ -233,6 +253,8 @@ def category_delete(request, pk):
 
     return render(request, 'adminapp/category_delete.html', content)
 
+
+# Контроллеры продукта
 
 @user_passes_test(lambda u: u.is_superuser)
 def products(request, pk):
@@ -319,3 +341,20 @@ def product_delete(request, pk):
     }
 
     return render(request, 'adminapp/product_delete.html', content)
+
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile (type) for {prefix}:')
+    [print(query['sql']) for query in update_queries]
+
+
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.product_set.update(is_active=True)
+        else:
+            instance.product_set.update(is_active=False)
+
+        db_profile_by_type(sender, 'UPDATE', conntction.queries)
