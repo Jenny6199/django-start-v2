@@ -74,7 +74,6 @@ class ProductCategoryUpdateView(UpdateView):
     model = ProductCategory
     template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('admin:categories')
-    # fields = '__all__'
     form_class = ProductCategoryEditForm
 
     def get_context_data(self, **kwargs):
@@ -86,7 +85,7 @@ class ProductCategoryUpdateView(UpdateView):
         if 'discount' in form.cleaned_data:
             discount = form.cleaned_data['discount']
             if discount:
-                self.object.product.set.update(price=F('price') * (1 - discount / 100))
+                self.object.product_set.update(price=F('price') * (1 - discount / 100))
                 db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
 
         return super().form_valid(form)
