@@ -38,7 +38,6 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
-@cache_page(3600)
 def products(request, pk=None, page=1):
     title = 'продукты'
     links_menu = get_links_menu()
@@ -242,4 +241,4 @@ def get_products_in_category_orderd_by_price(pk):
         return Product.objects.filter(
                 category__pk=pk,
                 is_active=True,
-                catgory__is_active=True).order_by('price')
+                category__is_active=True).order_by('price')

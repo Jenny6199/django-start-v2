@@ -110,18 +110,20 @@ class OrderItem(models.Model):
         """Возвращает стоимость позиции в заказе"""
         return self.product.price * self.quantity
 
-    def delete(self):
-        """Переопределяет метод удаления товара"""
-        self.product.quantity += self.quantity
-        self.product.save()
-        super(self.__class__, self).delete()
+# Реализовано в ordersapp/views.py через сигналы.
 
-    def save(self, *args, **kwargs):
-        """Переопределяет метод сохранения товара"""
-        if self.pk:
-            old_order_item = OrderItem.objects.get(pk=self.pk)
-            self.product.quantity -= self.quantity - old_order_item.quantity
-        else:
-            self.product.quantity -= self.quantity
-        self.product.save()
-        super(self.__class__, self).save(*args, **kwargs)
+    # def delete(self):
+    #     """Переопределяет метод удаления товара"""
+    #     self.product.quantity += self.quantity
+    #     self.product.save()
+    #     super(self.__class__, self).delete()
+
+    # def save(self, *args, **kwargs):
+    #     """Переопределяет метод сохранения товара"""
+    #     if self.pk:
+    #         old_order_item = OrderItem.objects.get(pk=self.pk)
+    #         self.product.quantity -= self.quantity - old_order_item.quantity
+    #     else:
+    #         self.product.quantity -= self.quantity
+    #     self.product.save()
+    #     super(self.__class__, self).save(*args, **kwargs)

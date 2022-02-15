@@ -5,6 +5,7 @@ from basketapp.models import Basket
 from mainapp.models import Product
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 
 @login_required
@@ -62,6 +63,6 @@ def basket_edit(request, pk, quantity):
             'basket_items': basket_items
         }
 
-        result = render_to_string('basketapp/includes/inc_basket_list.html', content)
+        result = render_to_string('includes/inc_basket_list.html', content)
 
         return JsonResponse({'result': result})

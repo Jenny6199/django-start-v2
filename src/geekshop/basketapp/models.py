@@ -48,18 +48,18 @@ class Basket(models.Model):
         _items = Basket.objects.filter(user=user).select_related()
         return _items
 
-    def delete(self, *args, **kwargs):
-        """Переопределяет метод удаления товара"""
-        self.product.quantity += self.quantity
-        self.product.save()
-        super(self.__class__, self).delete(*args, **kwargs)
-
-    def save(self, *args, **kwargs):
-        """Переопределяет метод сохранения товара"""
-        if self.pk:
-            old_basket_item = Basket.objects.get(pk=self.pk)
-            self.product.quantity -= self.quantity - old_basket_item.quantity
-        else:
-            self.product.quantity -= self.quantity
-        self.product.save()
-        super(self.__class__, self).save(*args, **kwargs)
+    # def delete(self, *args, **kwargs):
+    #     """Переопределяет метод удаления товара"""
+    #     self.product.quantity += self.quantity
+    #     self.product.save()
+    #     super(self.__class__, self).delete(*args, **kwargs)
+    #
+    # def save(self, *args, **kwargs):
+    #     """Переопределяет метод сохранения товара"""
+    #     if self.pk:
+    #         old_basket_item = Basket.objects.get(pk=self.pk)
+    #         self.product.quantity -= self.quantity - old_basket_item.quantity
+    #     else:
+    #         self.product.quantity -= self.quantity
+    #     self.product.save()
+    #     super(self.__class__, self).save(*args, **kwargs)
