@@ -11,7 +11,7 @@ from django.views.generic.detail import DetailView
 from django.utils.decorators import method_decorator
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
-from django.db import connections
+from django.db import connection
 
 # Классы представления пользователей
 
@@ -357,4 +357,4 @@ def product_is_active_update_productcategory_save(sender, instance, **kwargs):
         else:
             instance.product_set.update(is_active=False)
 
-        db_profile_by_type(sender, 'UPDATE', conntction.queries)
+        db_profile_by_type(sender, 'UPDATE', connection.queries)
