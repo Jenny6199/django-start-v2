@@ -3,41 +3,59 @@
 
 {% block content %}
     <div class="categories_list">
-        <div class="view_frame">
-             <button class="new_category">
+        <div class="">
+             <button class="btn btn-outline-warning">
                 <a href="{% url 'admin:category_create' %}">
-                    новая категория
+                    создать новую категорию
                 </a>
             </button>
         </div>
-
+    </br>
 
         {% for object in objects %}
-            <div class="category_record view_frame {% if not object.is_active %}not_active {% endif %}">
-                <div class="category_name">
-                    {{ object.name|title }}
-                </div>
-                <div class="category_desc">
-                    {{ object.description }}
-                </div>
-                <div class="category_actions">
-                    <button>
-                        <a href="{% url 'admin:products' object.pk %}">
-                            товары категории
-                        </a>
-                    </button>
-                    <button>
-                        <a href="{% url 'admin:category_update' object.pk %}">
-                            редактировать
-                        </a>
-                    </button>
-                    <button>
-                        <a href="{% url 'admin:category_delete' object.pk %}">
-                            удалить
-                        </a>
-                    </button>
+            <div class="container {% if not object.is_active %} not_active {% endif %}">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="category_id">
+                            {{ object.id }}
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="category_name">
+                            {{ object.name|title }}
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="category_desc">
+                            {{ object.description }}
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="category_actions">
+                            <button class="btn btn-outline-success">
+                                <a href="{% url 'admin:products' object.pk %}">
+                                    товары категории
+                                </a>
+                            </button>
+                            <button class="btn btn-outline-warning">
+                                <a href="{% url 'admin:category_update' object.pk %}">
+                                    редактировать
+                                </a>
+                            </button>
+                            <button class="btn btn-outline-danger">
+                                <a href="{% url 'admin:category_delete' object.pk %}">
+                                    удалить
+                                </a>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </br>
         {% endfor %}
     </div>
 {% endblock content %}
