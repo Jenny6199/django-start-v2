@@ -41,7 +41,7 @@
               <a href="#" ></a>
           </li>
           <li class="basket">
-              <i class="fa-solid fa-cart-shopping"></i>
+
               <a href=" {% url 'basket:view' %}">
                   <span>
                       {% if basket %}
@@ -49,6 +49,7 @@
                           ({{ basket.0.get_total_quantity }} шт )
                       {% endif %}
                   </span>
+                  <i class="fa-solid fa-cart-shopping"></i>
               </a>
           </li>
       </ul>
