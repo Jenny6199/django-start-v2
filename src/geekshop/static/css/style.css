@@ -40,12 +40,12 @@ float: left;
 
 .menu {
     list-style-type: none;
-    margin: 50px 0 0 274px;
-    float: inline-start;
+    margin: 50px 0 0 500px;
     position: absolute;
 }
+
 .menu li {
-	float: left;
+	float: inline-start;
 }
 .menu a {
 	color: #8c8c8c;
@@ -74,9 +74,9 @@ float: left;
 
 .search {
     display: block;
-    width: 23px;
+/*    width: 23px;
     height: 23px;
-    background-image: url(/static/img/search.png);
+    background-image: url(/static/img/search.png); */
     background-repeat: no-repeat;
     top: 68px;
     left: 1140px;
@@ -84,7 +84,6 @@ float: left;
 
 .basket {
     display: block;
-    width: 200px;
     height: 23px;
     background-image: none;
     top: 65px;
