@@ -5,29 +5,31 @@
 		{% block main-menu %}
 			{{ block.super }}
 		{% endblock main-menu %}
+
 		<div class="hero">
 			<h1>наши контакты</h1>
 		</div>
 
-		<div class="location">
-
+		<div class="flex_content">
 			{% for location in locations %}
-							<div class="location-1">
-				<i class="fa fa-map-marker fa-5x"></i>
-				<h4>{{ location.city|title}}</h4>
-				<div class="contacts">
-					<h5>Телефон</h5>
-					<p>{{ location.phone }}</p>
+				<div class="location-1">
+					<div class="contacts">
+						<i class="location-icon fa-solid fa-map-location-dot"></i>
+						<h4>{{ location.city|title}}</h4>
+					</div>
+					<div class="contacts">
+						<h5>Телефон</h5>
+						<p>{{ location.phone }}</p>
+					</div>
+					<div class="contacts">
+						<h5>Email</h5>
+						<p>{{ location.email }}</p>
+					</div>
+					<div class="contacts">
+						<h5>Адрес</h5>
+						<p>{{ location.address|title }}</p>
+					</div>
 				</div>
-				<div class="contacts">
-					<h5>Email</h5>
-					<p>{{ location.email }}</p>
-				</div>
-				<div class="contacts">
-					<h5>Адрес</h5>
-					<p>{{ location.address|title }}</p>
-				</div>
-			</div>
 			{% endfor %}
 		</div>
 
