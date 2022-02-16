@@ -91,12 +91,19 @@ class ProductCategoryUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-
 class ProductCategoryDeleteView(DeleteView):
-    """Класс представлений удаление категории продукта"""
+    """
+    Класс представлений
+    страницы удаление категории продукта
+    """
     model = ProductCategory
     template_name = 'adminapp/category_delete.html'
-    success_url = reverse_lazy('admin:categories_delete')
+    success_url = reverse_lazy('admin:categories')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'удаление категории'
+        return context
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
