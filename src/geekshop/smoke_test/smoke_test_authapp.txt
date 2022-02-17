@@ -1,0 +1,49 @@
+(venv) jenny6199@notebook-6199:~/geekbrains/django_start_v2/src/geekshop$ python3 manage.py test
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+db_profile UPDATE for <class 'mainapp.models.ProductCategory'>:
+ENo sequences found.
+No sequences found.
+No sequences found.
+No sequences found.
+.
+======================================================================
+ERROR: test_user_login (authapp.tests.TestUserManagement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/jenny6199/geekbrains/django_start_v2/src/geekshop/authapp/tests.py", line 10, in setUp
+    call_command('loaddata', 'test_db.json')
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/core/management/__init__.py", line 181, in call_command
+    return command.execute(*args, **defaults)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/core/management/base.py", line 398, in execute
+    output = self.handle(*args, **options)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/core/management/commands/loaddata.py", line 78, in handle
+    self.loaddata(fixture_labels)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/core/management/commands/loaddata.py", line 123, in loaddata
+    self.load_label(fixture_label)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/core/management/commands/loaddata.py", line 190, in load_label
+    obj.save(using=self.using)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/core/serializers/base.py", line 223, in save
+    models.Model.save_base(self.object, using=using, raw=True, **kwargs)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/db/models/base.py", line 765, in save_base
+    update_fields=update_fields,
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/dispatch/dispatcher.py", line 182, in send
+    for receiver in self._live_receivers(sender)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/dispatch/dispatcher.py", line 182, in <listcomp>
+    for receiver in self._live_receivers(sender)
+  File "/home/jenny6199/geekbrains/django_start_v2/src/geekshop/ordersapp/views.py", line 194, in product_quantity_update_save
+    instance.product.quantity -= instance.quantity - sender.objects.get(pk=instance.pk).quantity
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/jenny6199/geekbrains/django_start_v2/venv/lib/python3.6/site-packages/django/db/models/query.py", line 437, in get
+    self.model._meta.object_name
+ordersapp.models.OrderItem.DoesNotExist: Problem installing fixture '/home/jenny6199/geekbrains/django_start_v2/src/geekshop/test_db.json': OrderItem matching query does not exist.
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.503s
