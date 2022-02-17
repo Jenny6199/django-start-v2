@@ -1,0 +1,13 @@
+(venv) jenny6199@notebook-6199:~/geekbrains/django_start_v2/src/geekshop$ python3 manage.py test
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+No sequences found.
+No sequences found.
+No sequences found.
+No sequences found.
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.562s
+
+OK
+Destroying test database for alias 'default'...

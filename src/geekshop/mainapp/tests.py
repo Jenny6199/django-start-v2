@@ -2,7 +2,7 @@ from django.core.management import call_command
 import factory
 from django.test import TestCase
 from django.test.client import Client
-from mainapp.models import Product, ProductCategory
+from .models import Product, ProductCategory
 
 
 # class ModelTests(TestCase):
