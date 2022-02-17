@@ -18,6 +18,11 @@ class OrderList(ListView):
     """Контроллер для просмотра списка заказов"""
     model = Order
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Список ваших заказов'
+        return context
+
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
@@ -181,6 +186,7 @@ def order_forming_complete(request, pk):
 # def product_quantity_update_delete(sender, instance, **kwargs):
 #     instance.product.quantity += instance.quantity
 #     instance.product.save()
+
 
 def get_product_price(request, pk):
     if request.is_ajax():

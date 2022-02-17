@@ -15,6 +15,14 @@ class UsersListView(ListView):
     model = ShopUser
     template_name = 'adminapp/users.html'
 
+    def get_queryset(self):
+        return ShopUser.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Админка/Пользователи'
+        return context
+
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)

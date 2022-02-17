@@ -30,22 +30,28 @@
                         <td>{{ item.updated|date:"Y-m-d H:i:s" }}</td>
                         <td>{{ item.get_status_display }}</td>
                         <td>
-                            <a href="{% url 'ordersapp:order_read' item.pk %}">
-                                посмотреть
-                            </a>
+                            <button class="btn btn-outline-primary">
+                                <a class="text-dark" href="{% url 'ordersapp:order_read' item.pk %}">
+                                    посмотреть
+                                </a>
+                            </button>
                         </td>
                         <td>
                             {% if item.status == 'FM' %}
-                                <a href="{% url 'ordersapp:order_update' item.pk %}">
+                            <button class="btn btn-outline-primary">
+                                <a class="text-dark" href="{% url 'ordersapp:order_update' item.pk %}">
                                     редактировать
                                 </a>
+                            </button>
                             {% endif %}
                         </td>
                         <td>
                             {% if item.status == 'FM' %}
-                                <a href="{% url 'ordersapp:order_delete' item.pk %}">
+                            <button class="btn btn-outline-danger">
+                                <a class="text-dark" href="{% url 'ordersapp:order_delete' item.pk %}">
                                     удалить
                                 </a>
+                            </button>
                             {% endif %}
                         </td>
                         </tr>
@@ -53,15 +59,17 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-outline-warning" >
+            <a class="text-dark" href="{% url 'main' %}">
+                на главную
+            </a>
+        </button>
+        <button class="btn btn-outline-warning">
+            <a class="text-dark" href="{% url 'ordersapp:order_create' %}">
+                новый
+            </a>
+        </button>
+    </div>
 
-    <button class="btn btn-default btn-round">
-        <a href="{% url 'main' %}">
-            на главную
-        </a>
-    </button>
-    <button class="btn btn-default btn-round">
-        <a href="{% url 'ordersapp:order_create' %}">
-            новый
-        </a>
-    </button>
 {% endblock %}
