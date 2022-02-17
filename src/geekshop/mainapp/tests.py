@@ -5,17 +5,10 @@ from django.test.client import Client
 from .models import Product, ProductCategory
 
 
-# class ModelTests(TestCase):
-#    def test_product_create_with_price(self):
-#        product = Product(price=0)
-#        self.assertIsNotNone(product.price)
-
-
-# class TestMainappSmoke(TestCase):
-# 	def setUp(self):
-# 		call_command('flush', '--noinput')
-# 		call_command('loaddata', 'test_db.json')
-# 		self.client = Client()
+class ModelTests(TestCase):
+	def test_product_create_with_price(self):
+		product = Product(price=0)
+		self.assertIsNotNone(product.price)
 
 
 class ProductCategoryFabric(factory.django.DjangoModelFactory):
