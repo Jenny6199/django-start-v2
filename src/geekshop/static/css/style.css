@@ -45,7 +45,7 @@ float: left;
 }
 
 .menu li {
-	float: inline-start;
+	float: left;
 }
 .menu a {
 	color: #8c8c8c;
