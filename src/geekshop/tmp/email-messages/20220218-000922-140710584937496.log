@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IExlbmE=?=
+From: webmaster@localhost
+To: Lena@geekshop.local
+Date: Fri, 18 Feb 2022 00:09:22 -0000
+Message-ID: <164514296217.4802.14401075538007557187@notebook-6199>
+
+Для подтверждения учетной записи Lena на порталеhttp://localhost:8000 перейдите по ссылке:
+http://localhost:8000/auth/verify/Lena@geekshop.local/ce209428dad8ed66cd0d870150b4fbeb1ea1860b/
+-------------------------------------------------------------------------------

@@ -144,7 +144,7 @@ def contact(request):
 
 
 def product(request, pk):
-    title = 'продукты'
+    title = 'детали продукта'
     links_menu = get_links_menu()
     product = get_product(pk=pk)
 
