@@ -2,39 +2,59 @@
 {% load static %}
 
 {% block content %}
-    <div class="categories_list">
-        <div class="users_list">
+    <div class="head_space">
+        <div id="users_list" class="container">
             <button class="btn btn-outline-success">
                 <a href="{% url 'admin:user_create' %}">
                     новый пользователь
                 </a>
             </button>
-
-            {% for object in object_list %}
-                <div class="user_record view_frame{% if not object.is_active %}not_active{% endif %}">
-                    <div class="flex_content">
-                        <div id="avatar_{{ user.id }}">
-                            <img class="avatar_size" src="/media/{{ object.avatar|default:'users_avatars/default.jpg' }}" alt="{{ object.username }}">
-                        </div>
-                        <div class="user_info">
-                            <div class="user_role">
+            <hr>
+            <table class="table align-middle caption-top">
+                <caption class="big-bold">
+                    <strong>
+                        Пользователи
+                    </strong>
+                </caption>
+                <thead>
+                    <tr class="table-success">
+                        <th>ID</th>
+                        <th>Аватар</th>
+                        <th>Статус</th>
+                        <th>Инфо</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.id }}</td>
+                        <td>
+                            <img
+                                    class="avatar_size"
+                                    src="/media/{{ object.avatar|default:'users_avatars/default.jpg' }}"
+                                    alt="{{ object.username }}"
+                            >
+                        </td>
+                        <td>
                             {% if object.is_superuser %}
                                 Администратор
                             {% else %}
                                 Пользователь
                             {% endif %}
-                        </div>
+                        </td>
+                        <td>
                             <div class="user_name">
-                            <p><strong>{{ object.username }}</strong></p>
-                            <p>
-                                {% if object.first_name %}
-                                <b>{{ object.first_name|title }}</b>
-                                    {% if object.last_name %}
-                                        <p>{{ object.last_name|title }}</p>
+                                <p><strong>{{ object.username }}</strong></p>
+                                <div>
+                                    {% if object.first_name %}
+                                        <p>{{ object.first_name|title }}</p>
+                                        {% if object.last_name %}
+                                            <p>{{ object.last_name|title }}</p>
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
-                            </p>
-                        </div>
+                                </div>
+                            </div>
                             <div class="user_age">
                             age: {{ object.age }} лет
                         </div>
@@ -44,7 +64,8 @@
                             <div class="user_lastlogin">
                             logged: {{ object.last_login }}
                         </div>
-                            <br>
+                        </td>
+                        <td>
                             <button class="btn btn-outline-warning">
                                 <a href="{% url 'admin:user_update' object.pk %}">
                                     редактировать
@@ -55,10 +76,17 @@
                                     удалить
                                 </a>
                             </button>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <button class="btn btn-outline-warning">
+                <a href="{% url 'main' %}">
+                    на главную
+                </a>
+            </button>
         </div>
     </div>
 

@@ -3,9 +3,9 @@ import random
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.forms import forms, ModelForm
-
 from .models import ShopUser
 from .models import ShopUserProfile
+from django.urls import reverse_lazy
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -49,14 +49,16 @@ class ShopUserEditForm(UserChangeForm):
     class Meta:
         model = ShopUser
         fields = ('username', 'first_name', 'email', 'age', 'avatar', 'password')
+        success_url = reverse_lazy('adminapp:users')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'md-auto'
             field.help_text = ''
-            if field_name == 'password':
-                pass
+            # if field_name == 'password':
+            #     field.widget = forms.HiddenInput()
+            # this work only for MultiWidjets
 
     def clean_age(self):
         data = self.cleaned_data['age']
@@ -70,8 +72,9 @@ class ShopUserProfileEditForm(ModelForm):
     class Meta:
         model = ShopUserProfile
         fields = ('tagline', 'aboutMe', 'gender')
+        success_url = reverse_lazy('adminapp:users')
 
         def __init__(self, *args, **kwargs):
             super(ShopUserProfileEditForm, self).__init__(*args, **kwargs)
             for field_name, field in self.fields.items():
-                field.widget.attrs['class'] = 'form-control'
+                field.widget.attrs['class'] = 'col'

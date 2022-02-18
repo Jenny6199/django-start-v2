@@ -2,17 +2,39 @@
 {% load static %}
 
 {% block content %}
-    <div class="categories_list">
-        <h3>Редактирование категории</h3>
-        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div id="categories_list" class="d-grid gap-2 col-8 mx-auto">
+        <div class="flex_content">
+            <h3 class="categories_list">
+                Редактирование категории
+            </h3>
+        </div>
+        <form
+                class="form-horizontal head_space"
+                method="post"
+                enctype="multipart/form-data"
+        >
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" class="form-control" value="сохранить">
+            <br>
+            <input
+                    type="submit"
+                    class="btn btn-outline-success col-4"
+                    value="сохранить"
+            >
         </form>
-        <button class="btn btn-round form-control last">
-            <a href="{% url 'admin:categories' %}">
-                к списку категорий
-            </a>
-        </button>
+        <br>
+        <button class="btn btn-outline-warning col-4">
+                <a href="{% url 'admin:categories' %}">
+                    к списку категорий
+                </a>
+            </button>
+        <button class="btn btn-outline-warning col-4">
+                <a href="{% url 'main' %}">
+                    на главную страницу
+                </a>
+            </button>
     </div>
+
+
+
 {% endblock content %}

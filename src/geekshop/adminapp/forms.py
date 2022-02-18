@@ -2,6 +2,7 @@ from django import forms
 from authapp.models import ShopUser
 from authapp.forms import ShopUserEditForm
 from mainapp.models import ProductCategory, Product
+from django.urls import reverse, reverse_lazy
 
 
 class ShopUserAdminEditForm(ShopUserEditForm):
@@ -11,7 +12,16 @@ class ShopUserAdminEditForm(ShopUserEditForm):
 
 
 class ProductCategoryEditForm(forms.ModelForm):
-    discount = forms.IntegerField(label='скидка', required=False, min_value=0, max_value=90, initial=0)
+    """Форма редактирования категории продукта"""
+
+    # дополнительное поле для создания скидки
+    discount = forms.IntegerField(
+        label='скидка',
+        required=False,
+        min_value=0,
+        max_value=90,
+        initial=0
+    )
 
     class Meta:
         model = ProductCategory

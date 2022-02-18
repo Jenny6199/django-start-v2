@@ -47,7 +47,7 @@ class UserUpdateView(UpdateView):
     """
     model = ShopUser
     template_name = 'adminapp/user_update.html'
-    success_url = reverse_lazy('admin:user_update')
+    success_url = reverse_lazy('admin:users')
     fields = '__all__'
 
     def get_context_data(self, **kwargs):
@@ -177,7 +177,7 @@ def user_update(request, pk):
 
         if edit_form.is_valid():
             edit_form.save()
-            return HttpResponseRedirect(reverse('admin:user_update', args=[edit_user.pk]))
+            return HttpResponseRedirect(reverse_lazy('admin:users'))
     else:
         edit_form = ShopUserAdminEditForm(instance=edit_user)
 

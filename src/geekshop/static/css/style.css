@@ -1098,7 +1098,7 @@ td:first-child {
 
 .categories_list{
     width: 100%;
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
 .view_frame{
@@ -1120,7 +1120,7 @@ td:first-child {
 }
 
 .avatar_size{
-    max-width: 300px;
+    max-width: 200px;
 }
 .avatar_size:first-child {
     width:100%;
