@@ -2,15 +2,40 @@
 {% load static %}
 
 {% block content %}
-<div class="product_delete categories_list">
-    Уверены, что хотите удалить {{ product_to_delete.name }}
-    {% if product_to_delete.name %}
-        {{ product_to_delete.name|title }}
-    {% endif %}
-    ?
-  <form action="{% url 'admin:product_delete' product_to_delete.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" class="btn btn-danger" value="удалить">
-  </form>
-</div>
+    <div class="head_space_15">
+        <label
+                for="product_delete"
+                class="big-bold"
+        >
+            Удаление продукта
+        </label>
+        <div id="description">
+            Уверены, что хотите удалить
+            {% if product_to_delete.name %}
+                <strong>
+                 {{ product_to_delete.name|title }}
+                </strong>
+            {% endif %}
+            ?
+        </div>
+        <form
+              id="product_delete"
+              action="{% url 'admin:product_delete' product_to_delete.pk %}"
+              method="post"
+        >
+            {% csrf_token %}
+            <br>
+            <input
+                    type="submit"
+                    class="btn btn-outline-danger col-4"
+                    value="удалить"
+            >
+        </form>
+        <br>
+        <button class="btn btn-outline-success col-4">
+            <a href="{% url 'admin:products' category.id%}">
+                отмена
+            </a>
+        </button>
+    </div>
 {% endblock content %}

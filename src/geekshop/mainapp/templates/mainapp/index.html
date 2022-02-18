@@ -73,11 +73,14 @@
 				{% for product in products %}
 					<div class="block">
 						<a href="{% url 'products:product' product.pk %}">
-							<img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+							<img
+									src="/media/{{ product.image }}" alt="{{ product.short_desc }}"
+									class="avatar_size"
+							>
 							<div class="text">
 								<h3> {{ product.category.name }} </h3>
 								<h4>{{ product.name }}</h4>
-								<p>{{ product.description }} </p>
+								<p>{{ product.short_desc }} </p>
 							</div>
 						</a>
 					</div>

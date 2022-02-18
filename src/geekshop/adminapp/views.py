@@ -133,6 +133,7 @@ class ProductDetailView(DetailView):
 
 # Контроллеры пользователей
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def users(request):
     title = 'админка/пользователи'
@@ -294,11 +295,11 @@ def category_delete(request, pk):
 def products(request, pk):
     """
     Контроллер страницы просмотра детальной
-    информации о продукте
+    информации о продуктах в категории
     """
-    title = 'админка/продукт'
     category = get_object_or_404(ProductCategory, pk=pk)
-    products_list = Product.objects.filter(category__pk=pk).order_by('name')
+    products_list = Product.objects.filter(category__pk=pk).order_by('price').select_related()
+    title = 'товары категории ' +  category.name
 
     content = {
         'title': title,
@@ -342,14 +343,14 @@ def product_create(request, pk):
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_update(request, pk):
-    title = 'продукт/редактирование'
+    title = 'редактирование продукта'
     edit_product = get_object_or_404(Product, pk=pk)
 
     if request.method == 'POST':
         edit_form = ProductEditForm(request.POST, request.FILES, instance=edit_product)
         if edit_form.is_valid():
             edit_form.save()
-            return HttpResponseRedirect(reverse('admin:product_update', args=[edit_product.pk]))
+            return HttpResponseRedirect(reverse('admin:products', args=[edit_product.category_id]))
     else:
         edit_form = ProductEditForm(instance=edit_product)
 
@@ -374,7 +375,8 @@ def product_delete(request, pk):
 
     content = {
         'title': title,
-        'product_to_delete': product
+        'product_to_delete': product,
+        'category': product.category
     }
 
     return render(request, 'adminapp/product_delete.html', content)

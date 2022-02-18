@@ -2,17 +2,34 @@
 {% load static %}
 
 {% block content %}
-    <form class="form-horizontal" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ update_form.as_p }}
-        <input type="submit" class="form-control" value="сохранить">
-    </form>
-    <br>
-    <button class="form-control">
-        <a href="{% url 'admin:categories' %}">
-            к списку категорий
-        </a>
-    </button>
-    <br>
+    <div class="head_space"
+        <div class="container">
+            <label
+                    for="product_update"
+                    class="big-bold head_space"
+            >
+                Редактирование продукта
+            </label>
+            <form
+                    id="product_update"
+                    class="form-control"
+                    method="post"
+                    enctype="multipart/form-data"
+            >
+                {% csrf_token %}
+                {{ update_form.as_p }}
+                <input type="submit" class="btn btn-outline-success col-4" value="сохранить">
+            </form>
+            <br>
+            <div class="flex_content">
+                <button class="btn btn-outline-warning col-4">
+                <a href="{% url 'admin:categories' %}">
+                    к списку категорий
+                </a>
+            </button>
+            </div>
+            <hr>
+        </div>
+    </div>
 
 {% endblock content %}

@@ -2,53 +2,87 @@
 {% load static %}
 
 {% block content %}
-    <div class="products_list categories_list">
-        <button class="new_product">
-                    <a href="{% url 'admin:product_create' category.pk %}">
-            новый продукт
-        </a>
-        </button>
+    <div class="head_space">
+        <div id="product_list" class="container">
+            <button class="btn btn-outline-warning col-3">
+                <a href="{% url 'admin:product_create' category.pk %}">
+                    добавить товар в категорию
+                </a>
+            </button>
+            <hr>
 
-        {% for object in objects %}
-            <div class="product_record view_frame flex_content">
-                <div class="'medium_image">
-                    <img src="/media/{{object.image|default:'product_images/default.jpg'}}"
-                     alt="{{ object.name }}">
-                    <div class="product_name">
-                        {{ object.name|title }}
-                    </div>
-                </div>
-                <div>
-                    <div class="summary">
-                        <b>цена</b>
-                        <p>{{ object.price }} руб.</p>
-                        <b>количество</b>
-                        <p>{{ object.quantity }}</p>
-                    </div>
-                    <div class="product_desc">
-                        {{ object.short_desc|title }}
-                    </div>
-                    <br>
-                    <div class="product_actions">
-                        <button>
-                            <a href="{%url 'admin:product_read' object.pk %}">
-                                подробнее
-                            </a>
-                        </button>
-                        <button>
-                            <a href="{% url 'admin:product_update' object.pk %}">
-                                редактировать
-                            </a>
-                        </button>
-                        <button>
-                            <a href="{% url 'admin:product_delete' object.pk %}">
-                                удалить
-                            </a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+            <table class="table align-middle caption-top">
+                <caption class="big-bold">
+                    <strong>
+                        Товары в категории {{ category.name }}
+                    </strong>
+                </caption>
+                <thead>
+                    <tr class="table-success align-middle">
+                        <td>Id</td>
+                        <td>Изображение</td>
+                        <td>Название</td>
+                        <td>Описание</td>
+                        <td>Цена</td>
+                        <td>Количество на складе</td>
+                        <td>Действия</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in objects %}
+                        <tr class="{% if not object.is_active %} not_active {% endif %}">
+                            <td id="product_id" class="col">
+                                {{ object.id }}
+                            </td>
+                            <td id="product_image" class="col-3">
+                                <img src="/media/{{object.image|default:'product_images/default.jpg'}}">
+                            </td>
+                            <td id="product_name" class="col-2">
+                                <strong>
+                                    {{ object.name }}
+                                </strong>
+                            </td>
+                            <td id="product_description" class="col-4">
+                                {{ object.description }}
+                            </td>
+                            <td id="product_price" class="col">
+                                {{ object.price }}
+                            </td>
+                            <td id="product_quantity" class="col">
+                                {{ object.quantity }}
+                            </td>
+                            <td id="product_action" class="col-6">
+                                <div class="">
+                                    <button class="btn btn-outline-success">
+                                        <a href="{%url 'admin:product_read' object.pk %}">
+                                            подробнее
+                                        </a>
+                                    </button>
+                                    <br>
+                                    <button class="btn btn-outline-warning">
+                                        <a href="{% url 'admin:product_update' object.pk %}">
+                                            редактировать
+                                        </a>
+                                    </button>
+                                    <br>
+                                    <button class="btn btn-outline-danger">
+                                        <a href="{% url 'admin:product_delete' object.pk %}">
+                                            удалить
+                                        </a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            <br>
+            <button class="btn btn-outline-warning col-3">
+                <a href="{% url 'admin:categories' %}">
+                    Вернуться к списку категорий
+                </a>
+            </button
+        </div>
     </div>
-<br>
+    <hr>
 {% endblock content %}

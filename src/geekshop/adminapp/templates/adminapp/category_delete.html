@@ -2,36 +2,38 @@
 {% load static %}
 
 {% block content %}
-<div class="container head_space_15">
-    <div class="row">
-        <div class="col-7">
-            <p>
-                <strong>Подтвердите удаление категории</strong>
-            </p>
-            <p>
-                {% if category_to_delete.name %}
-                    {{ category_to_delete.name|title }}
-                {% endif %}
-            </p>
-            <p>
-                {% if category_to_delete.description %}
-                    {{ category_to_delete.description }}
-                {% endif %}
-            </p>
+    <div class="head_space_15">
+        <label
+                for="category_delete"
+                class="big-bold"
+        >
+            Подтвердите удаление категории
+        </label>
+        <div class="">
+            {% if category_to_delete.name %}
+                <strong>
+                   {{ category_to_delete.name|title }}
+                </strong>
+            {% endif %}
+            <br>
+            {% if category_to_delete.description %}
+                {{ category_to_delete.description }}
+            {% endif %}
         </div>
-        <div class="col-2">
-              <form action="{% url 'admin:category_delete' category_to_delete.pk %}" method="post">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-danger" value="удалить">
-              </form>
-        </div>
-        <div class="col-2">
-            <button class="btn btn-success">
-                <a href="{% url 'admin:categories' %}">
-                    Отмена
-                </a>
-            </button>
-        </div>
+        <br>
+        <form
+              id ="category_delete"
+              action="{% url 'admin:category_delete' category_to_delete.pk %}"
+              method="post"
+        >
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger col-4" value="удалить">
+        </form>
+        <br>
+        <button class="btn btn-success col-4">
+            <a href="{% url 'admin:categories' %}">
+                Отмена
+            </a>
+        </button>
     </div>
-</div>
 {% endblock content %}

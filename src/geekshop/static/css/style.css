@@ -1154,10 +1154,12 @@ td:first-child {
 
 .head_space{
     margin-top: 10vh;
+    text-align: center;
 }
 
 .head_space_15{
     margin-top: 15vh;
+    text-align: center;
 }
 
 .orders_list{

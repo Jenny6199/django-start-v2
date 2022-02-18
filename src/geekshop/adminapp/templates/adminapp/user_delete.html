@@ -2,23 +2,42 @@
 {% load static %}
 
 {% block content %}
-<div class="user_delete categories_list">
-    Уверены, что хотите удалить {{ user_to_delete.username }}
-    {% if user_to_delete.first_name %}
-      ({{ user_to_delete.first_name|title }}
-      {% if user_to_delete.last_name %}
-        {{ user_to_delete.last_name|title }}
-      {% endif %})
-    {% endif %}
-    ?
-  <form action="{% url 'admin:user_delete' user_to_delete.pk %}" method="post">
+    <div class="head_space_15">
+                <label
+            class="big-bold"
+            for="user_delete"
+        >
+                Удаление пользователя
+        </label>
+        <div id="delete_confirm">
+            Уверены, что хотите удалить
+            <strong>
+                {% if user_to_delete.first_name %}
+                    {{ user_to_delete.first_name|title }}
+                    {% if user_to_delete.last_name %}
+                        {{ user_to_delete.last_name|title }}
+                    {% endif %}
+                {% endif %}
+            </strong>
+            ?
+        </div>
+        <hr>
+        <form
+          class="mx-auto"
+          id="user_delete"
+          action="{% url 'admin:user_delete' user_to_delete.pk %}"
+          method="post"
+  >
     {% csrf_token %}
-    <input type="submit" class="btn btn-danger" value="удалить">
+    <input type="submit" class="btn btn-danger col-4" value="удалить">
   </form>
-  <button class="btn btn-success">
-    <a href="{% url 'admin:users' %}">
-      Отмена
-    </a>
-  </button>
-</div>
+        <br>
+        <div>
+        <button class="btn btn-success col-4">
+            <a href="{% url 'admin:users' %}">
+                Отмена
+            </a>
+        </button>
+    </div>
+    </div>
 {% endblock content %}
