@@ -8,35 +8,39 @@
 {% endblock page_name %}
 
 {% block content %}
-    <div class="admin_container">
-        <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
-            {% csrf_token %}
-            {% if next %}
-                <input type="hidden" name="next" value="{{ next }}">
-            {% endif %}
-            {{ login_form.as_p }}
+    <div class="flex_content head_space">
+        <div class="col-8">
+            <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+                {% csrf_token %}
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
+                {{ login_form.as_p }}
+                <br>
+                <div class="flex_content">
+                    <input class="btn btn-outline-success lg col-6" type="submit" value="войти">
+                </div>
+            </form>
             <br>
-            <input class="form-control" type="submit" value="войти">
-        </form>
-        <br>
-        <div class="flex_content view_frame">
-            <button class="btn btn-round form-control">
-                <a href="{% url 'auth:register' %}">
-                    Зарегистрироваться
-                </a>
-            </button>
+            <div class="flex_content">
+                <button class="btn btn-outline-success col-3">
+                    <a href="{% url 'auth:register' %}">
+                        Зарегистрироваться
+                    </a>
+                </button>
 
-            <button class="btn btn-round form-control">
-                <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
-                    Вход через ВКонтакте
-                </a>
-            </button>
+                <button class="btn btn-outline-primary col-3">
+                    <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+                        Вход через ВКонтакте
+                    </a>
+                </button>
 
-                    <button class="btn btn-round form-control">
-                <a href="{% url 'main' %}">
-                    На главную
-                </a>
-            </button>
+                <button class="btn btn-outline-warning col-3">
+                        <a href="{% url 'main' %}">
+                            На главную
+                        </a>
+                    </button>
+            </div>
         </div>
     </div>
 {% endblock content %}
