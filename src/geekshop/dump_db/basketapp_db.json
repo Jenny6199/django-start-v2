@@ -1,0 +1,1 @@
+[{"model": "basketapp.basket", "pk": 20, "fields": {"user": 4, "product": 2, "quantity": 1, "add_datetime": "2022-01-13T20:55:13.514Z"}}, {"model": "basketapp.basket", "pk": 24, "fields": {"user": 4, "product": 5, "quantity": 1, "add_datetime": "2022-01-19T00:01:56.798Z"}}]
