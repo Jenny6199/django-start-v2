@@ -29,11 +29,13 @@ def get_same_products(hot_product):
 
 def main(request):
     title = 'главная'
-    products = get_products()[:3]
+    products = get_products()[:4]
+    links_menu = get_links_menu()
 
     content = {
         'title': title,
         'products': products,
+        'links_menu': links_menu,
     }
     return render(request, 'mainapp/index.html', content)
 
