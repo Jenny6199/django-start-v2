@@ -11,7 +11,7 @@ from django.db.models import F
 @login_required
 def basket(request):
     title = 'корзина'
-    basket_items = Basket.objects.filter(user=request.user).select_related('user').order_by('product__category')
+    basket_items = Basket.objects.filter(user=request.user)
 
     content = {
         'title': title,
@@ -31,10 +31,10 @@ def basket_add(request, pk):
     if not basket:
         basket = Basket(user=request.user, product=product)
 
-    # basket.quantity += 1
-    # basket.save()
+    basket.quantity += 1
+    basket.save()
 
-    basket.update(quantity=F('quantity') + 1)
+    # basket.update(quantity=F('quantity') + 1)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

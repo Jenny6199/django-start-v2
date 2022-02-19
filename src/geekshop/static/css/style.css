@@ -1154,7 +1154,7 @@ td:first-child {
 
 .head_space{
     margin-top: 10vh;
-    text-align: center;
+    text-align: left;
 }
 
 .head_space_15{
@@ -1173,4 +1173,8 @@ td:first-child {
 
 .z-1 {
     z-index: 1;
+}
+
+.text-center {
+    text-align: center;
 }

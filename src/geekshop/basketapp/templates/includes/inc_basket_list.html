@@ -3,11 +3,12 @@
     <table class="table align-middle caption-top">
         <caption class="big-bold">
             Ваша корзина
-            {% if user.first_name %}
-                {{ user.first_name|title }}
-            {% else %}
-                Пользователь
-            {% endif %}
+<!--            mistake - После обновления корзины теряется user.first_name-->
+<!--            {% if user.first_name %}-->
+<!--                {{ user.first_name|title }}-->
+<!--            {% else %}-->
+<!--                Пользователь-->
+<!--            {% endif %}-->
             <hr>
             {% if basket_items %}
                 <h4 id="basket_summary">
@@ -16,7 +17,7 @@
             {% endif %}
         </caption>
         <thead>
-            <tr class="'table-success align-middle">
+            <tr class="table-success align-middle">
                 <td id="id" class="col-1">
                     Id
                 </td>
@@ -32,7 +33,7 @@
                 <td id="number" class="col-2">
                     В заказе
                 </td>
-                <td id="quantity" class="col-2">
+                <td id="quantity" class="col-2 text-center">
                     На складе
                 </td>
                 <td id="action" class="col-2">
@@ -44,7 +45,7 @@
             {% for item in basket_items %}
                 <tr>
                     <td id="item_id" class="col">
-                        {{ item.id }}
+                        {{ item.product_id }}
                     </td>
                     <td id="item_image" class="col">
                           <img
@@ -71,8 +72,8 @@
                                   value="{{ item.quantity }}"
                           >
                     </td>
-                    <td id="item_quantity" class="col">
-                        н/д
+                    <td id="item_quantity" class="col text-center">
+                        {{ item.product.quantity }}
                     </td>
                     <td id="item_action" class="col">
                           <button class="btn btn-outline-danger">
