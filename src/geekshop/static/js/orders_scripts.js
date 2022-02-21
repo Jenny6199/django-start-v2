@@ -7,7 +7,6 @@ window.onload = function () {
     var TOTAL_FORMS = parseInt($('input[name="orderitems-TOTAL_FORMS"]').val());
     var order_total_quantity = parseInt($('.order_total_quantity').text()) || 0;
     var order_total_cost = parseFloat($('.order_total_cost').text().replace(',', '.')) || 0;
-    console.log('info: start');
 
     function orderSummaryUpdate(orderitem_price, delta_quantity) {
         delta_cost = orderitem_price * delta_quantity;
@@ -15,7 +14,6 @@ window.onload = function () {
         order_total_cost = Number((order_total_cost + delta_cost).toFixed(2));
         $('.order_total_quantity').html(order_total_quantity.toString());
         $('.order_total_cost').html(order_total_cost.toString());
-        console.log('func orderSummaryUpdate done');
     }
 
     function orderSummaryRecalc () {
@@ -27,7 +25,6 @@ window.onload = function () {
         }
         $('.order_total_quantity').html(order_total_quantity.toString());
         $('.order_total_cost').html(Number(order_total_cost.toFixed(2)).toString());
-        console.log('func orderSummaryRecalc done.')
     }
 
     function deleteOrderItem(row) {
@@ -38,7 +35,6 @@ window.onload = function () {
         if (!isNaN(price_arr[orderitem_num]) && !isNaN(delta_quantity)) {
             orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
         }
-        console.log('func deleteOrderItem done.')
     }
 
     function get_price_and_quantity_array () {
@@ -52,15 +48,13 @@ window.onload = function () {
                 price_arr[i] = 0;
             }
         }
-        console.log('info: func get_price_and_quantity_array done');
+
+        if (!order_total_quantity) {
+            orderSummaryRecalc();
+        }
     }
 
     get_price_and_quantity_array();
-
-    if (!order_total_quantity) {
-        console.log('info: work block - !order_total_quantity');
-        orderSummaryRecalc();
-    }
 
     $('.order_form').on('click', 'input[type="number"]', function() {
         var target = event.target;
@@ -70,7 +64,6 @@ window.onload = function () {
         delta_quantity = orderitem_quantity - quantity_arr[orderitem_num];
         quantity_arr[orderitem_num] = orderitem_quantity;
         orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
-        console.log('info: click-input-number func done');
         }
     });
 
