@@ -56,6 +56,8 @@ class ShopUserEditForm(UserChangeForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'md-auto'
             field.help_text = ''
+            if field_name == 'password':
+                field.widget.attrs['class'] = 'hidden'
             # if field_name == 'password':
             #     field.widget = forms.HiddenInput()
             # this work only for MultiWidjets
